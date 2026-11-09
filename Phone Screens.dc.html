@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Huninn&family=Nunito:wght@600;700;800;900&family=Noto+Sans+TC:wght@500;700;900&display=swap">
+<style>body{margin:0;background:#0C0A24}a{color:#2EE6D6}a:hover{color:#FFD23F}
+@keyframes phShake{0%,100%{transform:translateX(0)}15%{transform:translateX(-14px)}30%{transform:translateX(12px)}45%{transform:translateX(-8px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+@keyframes phBlink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes phBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes phBar{0%{width:100%}100%{width:0%}}
+@keyframes phDots{0%{content:''}}
+@keyframes phPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes phSpin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div style="padding:100px;display:flex;flex-direction:column;gap:70px;font-family:'Nunito','Noto Sans TC',sans-serif;color:#FFFFFF">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:80px;line-height:1">接字派對 · 玩家手機端</div>
+    <div style="font-size:30px;font-weight:700;color:#C9CCE8">390×844 直式 · 單手操作：主要動作放在拇指熱區（下半部）· 點擊目標 ≥ 48px</div>
+  </div>
+  <div style="display:flex;gap:80px;flex-wrap:wrap;width:3400px">
+
+    <!-- P1 JOIN -->
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;align-items:center;gap:14px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:12px;padding:0 14px">P1</span>加入</div>
+      <div data-screen-label="P1 加入" style="position:relative;width:390px;height:844px;overflow:hidden;border-radius:52px;border:8px solid #14112F;box-shadow:0 14px 0 #000;background:#1E1B4B;background-image:radial-gradient(rgba(255,255,255,.06) 2px,transparent 3px);background-size:28px 28px;box-sizing:content-box">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:700 16px 'Fredoka',sans-serif"><span>9:41</span><span>●●● ▮</span></div>
+        <div style="padding:8px 22px 22px;display:flex;flex-direction:column;gap:18px">
+          <div style="text-align:center;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px;-webkit-text-stroke:6px #14112F;paint-order:stroke fill;text-shadow:0 5px 0 #14112F;transform:rotate(-2deg)">接字派對</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:17px;font-weight:900">房間碼</div>
+            <div style="display:flex;gap:10px">
+              <sc-for list="{{ code }}" as="c" hint-placeholder-count="4">
+                <div style="flex:1;height:78px;display:grid;place-items:center;background:{{ c.bg }};color:#14112F;border:{{ c.border }};border-radius:20px;box-shadow:0 5px 0 #14112F;font:700 44px 'Fredoka',sans-serif">{{ c.v }}<sc-if value="{{ c.caret }}" hint-placeholder-val="{{ false }}"><span style="width:4px;height:40px;background:#14112F;border-radius:2px;animation:phBlink 1s steps(1) infinite"></span></sc-if></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;font-size:17px;font-weight:900"><span>暱稱</span><span style="color:#A5A2CC">2 / 8</span></div>
+            <div style="height:58px;display:flex;align-items:center;padding:0 18px;background:#FFFFFF;color:#14112F;border:4px solid #14112F;border-radius:18px;box-shadow:0 5px 0 #14112F;font-size:22px;font-weight:800">小美</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:17px;font-weight:900">選個角色</div>
+            <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+              <sc-for list="{{ pick }}" as="a" hint-placeholder-count="12">
+                <div style="position:relative;height:74px;display:grid;place-items:center;border-radius:20px;background:{{ a.bg }};border:{{ a.border }}">
+                  <dc-import name="Avatar" kind="{{ a.k }}" mood="{{ a.mood }}" size="58" hint-size="58px,58px"></dc-import>
+                  <sc-if value="{{ a.sel }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:-8px;right:-6px"><dc-import name="Sprite" icon="check" size="28" hint-size="28px,28px"></dc-import></div></sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="height:68px;display:flex;align-items:center;justify-content:center;background:#FF3D81;border:5px solid #14112F;border-radius:24px;box-shadow:0 7px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:28px;-webkit-text-stroke:4px #14112F;paint-order:stroke fill;cursor:pointer" style-active="transform:translateY(6px);box-shadow:0 1px 0 #14112F">加入派對！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 WAITING -->
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;align-items:center;gap:14px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:12px;padding:0 14px">P2</span>等待</div>
+      <div data-screen-label="P2 等待" style="position:relative;width:390px;height:844px;overflow:hidden;border-radius:52px;border:8px solid #14112F;box-shadow:0 14px 0 #000;background:#1E1B4B;background-image:radial-gradient(rgba(255,255,255,.06) 2px,transparent 3px);background-size:28px 28px">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:700 16px 'Fredoka',sans-serif"><span>9:41</span><span>●●● ▮</span></div>
+        <div style="padding:10px 22px 26px;height:774px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:18px">
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 16px;background:#2EE6D6;color:#14112F;border:4px solid #14112F;border-radius:999px;font-size:17px;font-weight:900"><dc-import name="Sprite" icon="check" size="22" hint-size="22px,22px"></dc-import>已加入房間 PQ7K</div>
+          <div style="position:relative;margin-top:30px;width:240px;height:240px;display:grid;place-items:center">
+            <div style="position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(rgba(255,210,63,.25) 0 12deg,transparent 12deg 24deg);animation:phSpin 12s linear infinite"></div>
+            <div style="animation:phBob 1.6s ease-in-out infinite"><dc-import name="Avatar" kind="0" mood="score" size="190" hint-size="190px,190px"></dc-import></div>
+          </div>
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:40px;-webkit-text-stroke:5px #14112F;paint-order:stroke fill">小美</div>
+          <div style="padding:10px 22px;background:#2C2870;border:4px solid #14112F;border-radius:999px;box-shadow:0 5px 0 #14112F;font-size:19px;font-weight:900">等待主持人開始<span style="animation:phBlink 1.2s steps(1) infinite">…</span></div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="display:flex">
+              <sc-for list="{{ joined }}" as="j" hint-placeholder-count="5"><div style="margin-left:-12px;width:46px;height:46px;border-radius:50%;background:#2C2870;border:3px solid #14112F;display:grid;place-items:center"><dc-import name="Avatar" kind="{{ j }}" size="38" hint-size="38px,38px"></dc-import></div></sc-for>
+            </div>
+            <div style="font-size:17px;font-weight:800;color:#C9CCE8">共 6 位玩家</div>
+          </div>
+          <div style="flex:1"></div>
+          <div style="position:relative;align-self:stretch;padding:18px;background:#FFFFFF;color:#14112F;border:5px solid #14112F;border-radius:24px;box-shadow:0 6px 0 #14112F;transform:rotate(-1.5deg)">
+            <div style="position:absolute;top:-14px;left:50%;margin-left:-44px;width:88px;height:26px;background:rgba(46,230,214,.75);transform:rotate(3deg)"></div>
+            <div style="font-size:17px;font-weight:900;color:#5B54C9;margin-bottom:4px">小提示</div>
+            <div style="font-size:18px;font-weight:800;line-height:1.4">單字越長分數越高，但別讓炸彈停在你手上！</div>
+          </div>
+          <div style="align-self:stretch;height:56px;display:flex;align-items:center;justify-content:center;border:4px solid #FFFFFF;border-radius:20px;font-size:19px;font-weight:900">換角色</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 INPUT -->
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;align-items:center;gap:14px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:12px;padding:0 14px">P3</span>遊戲輸入</div>
+      <div data-screen-label="P3 遊戲輸入" style="position:relative;width:390px;height:844px;overflow:hidden;border-radius:52px;border:8px solid #14112F;box-shadow:0 14px 0 #000;background:#1E1B4B">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:700 16px 'Fredoka',sans-serif"><span>9:41</span><span>●●● ▮</span></div>
+        <div style="padding:4px 18px 0;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px;padding:4px 12px;background:#FFD23F;color:#14112F;border:3px solid #14112F;border-radius:999px;font-size:16px;font-weight:900"><dc-import name="Sprite" icon="zap" size="20" hint-size="20px,20px"></dc-import>閃電搶答</div>
+            <div style="display:flex;align-items:center;gap:6px;font:700 22px 'Fredoka',sans-serif"><dc-import name="Avatar" kind="0" size="32" hint-size="32px,32px"></dc-import>2,480</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="flex:1;position:relative;height:22px;background:#14112F;border:3px solid #14112F;border-radius:999px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:60%;background:#FFD23F;border-radius:999px;animation:phBar 20s linear infinite"></div></div>
+            <div style="font:700 20px 'Fredoka',sans-serif">12s</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;background:#2C2870;border:4px solid #14112F;border-radius:24px;box-shadow:0 5px 0 #14112F">
+            <dc-import name="LetterTile" letter="S" variant="glow" size="84" hint-size="84px,84px"></dc-import>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+              <div style="font-size:18px;font-weight:900">用 S 開頭！</div>
+              <div style="font-size:15px;font-weight:700;color:#C9CCE8">已搶到：SNAKE · STAR</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="position:relative;width:48px;height:48px;display:grid;place-items:center;background:#3A3580;border:3px solid #14112F;border-radius:14px"><dc-import name="Sprite" icon="shield" size="32" hint-size="32px,32px"></dc-import><div style="position:absolute;bottom:-6px;right:-6px;padding:0 5px;background:#FFFFFF;color:#14112F;border:2px solid #14112F;border-radius:8px;font:700 13px 'Fredoka',sans-serif">1</div></div>
+              <div style="position:relative;width:48px;height:48px;display:grid;place-items:center;background:#3A3580;border:3px solid #14112F;border-radius:14px"><dc-import name="Sprite" icon="star2x" size="34" hint-size="34px,34px"></dc-import><div style="position:absolute;bottom:-6px;right:-6px;padding:0 5px;background:#FFFFFF;color:#14112F;border:2px solid #14112F;border-radius:8px;font:700 13px 'Fredoka',sans-serif">1</div></div>
+            </div>
+          </div>
+          <div style="height:86px;display:flex;align-items:center;gap:2px;padding:0 20px;background:#FFFFFF;color:#14112F;border:5px solid #2EE6D6;outline:4px solid #14112F;border-radius:24px;box-shadow:0 6px 0 #14112F;font:700 42px 'Fredoka',sans-serif;letter-spacing:3px">SUNSET<span style="width:4px;height:44px;background:#FF3D81;border-radius:2px;animation:phBlink 1s steps(1) infinite"></span></div>
+          <div style="height:72px;display:flex;align-items:center;justify-content:center;gap:10px;background:#FF3D81;border:5px solid #14112F;border-radius:24px;box-shadow:0 7px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:30px;-webkit-text-stroke:4px #14112F;paint-order:stroke fill;cursor:pointer" style-active="transform:translateY(6px);box-shadow:0 1px 0 #14112F">送出
+            <svg width="28" height="28" viewBox="0 0 100 100"><path d="M14 50 H80 M54 22 L84 50 L54 78" fill="none" stroke="#14112F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:290px;background:#2C2870;border-top:4px dashed rgba(255,255,255,.25);display:grid;place-items:center;color:#A5A2CC;font-size:17px;font-weight:800">系統鍵盤區域（送出鈕保持在鍵盤上方）</div>
+      </div>
+    </div>
+
+    <!-- P3B ERROR -->
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;align-items:center;gap:14px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><span style="background:#FF3D81;color:#FFFFFF;border:4px solid #14112F;border-radius:12px;padding:0 14px">P3B</span>錯誤抖動回饋</div>
+      <div data-screen-label="P3B 錯誤" style="position:relative;width:390px;height:844px;overflow:hidden;border-radius:52px;border:8px solid #14112F;box-shadow:0 14px 0 #000;background:#1E1B4B">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:700 16px 'Fredoka',sans-serif"><span>9:41</span><span>●●● ▮</span></div>
+        <div style="padding:4px 18px 0;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px;padding:4px 12px;background:#FF3D81;color:#FFFFFF;border:3px solid #14112F;border-radius:999px;font-size:16px;font-weight:900"><dc-import name="Sprite" icon="bomb" size="20" hint-size="20px,20px"></dc-import>炸彈傳遞</div>
+            <div style="display:flex;gap:2px"><dc-import name="Sprite" icon="heart" size="26" hint-size="26px,26px"></dc-import><dc-import name="Sprite" icon="heart" size="26" hint-size="26px,26px"></dc-import><dc-import name="Sprite" icon="heart" variant="empty" size="26" hint-size="26px,26px"></dc-import></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="flex:1;position:relative;height:22px;background:#14112F;border:3px solid #14112F;border-radius:999px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:18%;background:repeating-linear-gradient(-45deg,#FF3D81 0 10px,#FF8A3D 10px 20px);border-radius:999px"></div></div>
+            <div style="display:flex;align-items:center;gap:4px;font:700 20px 'Fredoka',sans-serif;color:#FF8A3D"><dc-import name="Sprite" icon="trap" size="20" hint-size="20px,20px"></dc-import>3s</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;background:#3A1640;border:4px solid #14112F;border-radius:24px;box-shadow:0 5px 0 #14112F">
+            <dc-import name="Bomb" stage="critical" size="84" hint-size="84px,84px"></dc-import>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:15px;font-weight:800;color:#C9CCE8">上一個字 TIGE<span style="color:#FFD23F">R</span></div>
+              <div style="display:flex;align-items:center;gap:6px;font-size:18px;font-weight:900">接<dc-import name="LetterTile" letter="R" variant="glow" size="40" hint-size="40px,40px"></dc-import>開頭！</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FF3D81;border:4px solid #14112F;border-radius:18px;font-size:17px;font-weight:900;animation:phShake .42s ease-in-out infinite;animation-delay:.2s">
+            <dc-import name="Sprite" icon="cross" size="30" hint-size="30px,30px"></dc-import>RABBIT 已經用過了！再想一個
+          </div>
+          <div style="height:86px;display:flex;align-items:center;gap:2px;padding:0 20px;background:#FFE6EF;color:#14112F;border:5px solid #FF3D81;outline:4px solid #14112F;border-radius:24px;box-shadow:0 6px 0 #14112F;font:700 42px 'Fredoka',sans-serif;letter-spacing:3px;animation:phShake .42s ease-in-out infinite">RABBIT<span style="margin-left:auto"><dc-import name="Sprite" icon="cross" size="36" hint-size="36px,36px"></dc-import></span></div>
+          <div style="height:72px;display:flex;align-items:center;justify-content:center;gap:10px;background:#FF3D81;border:5px solid #14112F;border-radius:24px;box-shadow:0 7px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:30px;-webkit-text-stroke:4px #14112F;paint-order:stroke fill">送出
+            <svg width="28" height="28" viewBox="0 0 100 100"><path d="M14 50 H80 M54 22 L84 50 L54 78" fill="none" stroke="#14112F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:290px;background:#2C2870;border-top:4px dashed rgba(255,255,255,.25);display:grid;place-items:center;color:#A5A2CC;font-size:17px;font-weight:800">系統鍵盤區域 · 同時觸發 120ms 震動</div>
+      </div>
+    </div>
+
+    <!-- P4 SPECTATOR -->
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;align-items:center;gap:14px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:12px;padding:0 14px">P4</span>被淘汰 · 觀眾搗蛋</div>
+      <div data-screen-label="P4 觀眾" style="position:relative;width:390px;height:844px;overflow:hidden;border-radius:52px;border:8px solid #14112F;box-shadow:0 14px 0 #000;background:#1E1B4B;background-image:radial-gradient(rgba(255,255,255,.06) 2px,transparent 3px);background-size:28px 28px">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:700 16px 'Fredoka',sans-serif"><span>9:41</span><span>●●● ▮</span></div>
+        <div style="padding:6px 18px 24px;height:776px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:#2C2870;border:4px solid #14112F;border-radius:24px">
+            <dc-import name="Avatar" kind="3" mood="out" size="70" hint-size="70px,70px"></dc-import>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:24px">你被淘汰了…</div>
+              <div style="font-size:16px;font-weight:800;color:#C9CCE8">但還能搗蛋！觀眾模式</div>
+            </div>
+          </div>
+          <div style="font-size:17px;font-weight:900">選擇道具</div>
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+            <sc-for list="{{ items }}" as="it" hint-placeholder-count="4">
+              <div style="position:relative;height:138px;box-sizing:border-box;padding:12px;background:{{ it.bg }};color:{{ it.fg }};border:{{ it.border }};border-radius:24px;box-shadow:0 5px 0 #14112F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;overflow:hidden;opacity:{{ it.op }}">
+                <dc-import name="Sprite" icon="{{ it.icon }}" size="54" hint-size="54px,54px"></dc-import>
+                <div style="font-size:17px;font-weight:900">{{ it.t }}</div>
+                <div style="font-size:14px;font-weight:800;opacity:.85">{{ it.d }}</div>
+                <div style="position:absolute;top:8px;right:8px;padding:0 7px;background:#FFFFFF;color:#14112F;border:2px solid #14112F;border-radius:8px;font:700 14px 'Fredoka',sans-serif">{{ it.n }}</div>
+                <sc-if value="{{ it.cd }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;inset:0;background:conic-gradient(rgba(20,17,47,.75) 0 65%,transparent 65% 100%);display:grid;place-items:center;font:700 28px 'Fredoka',sans-serif;color:#FFFFFF">12s</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-size:17px;font-weight:900">丟給誰？</div>
+          <div style="display:flex;gap:10px;overflow:hidden">
+            <sc-for list="{{ targets }}" as="t" hint-placeholder-count="5">
+              <div style="flex:none;width:64px;display:flex;flex-direction:column;align-items:center;gap:4px">
+                <div style="width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:#2C2870;border:{{ t.border }}"><dc-import name="Avatar" kind="{{ t.k }}" size="48" hint-size="48px,48px"></dc-import></div>
+                <div style="font-size:14px;font-weight:900">{{ t.n }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:1"></div>
+          <div style="height:76px;display:flex;align-items:center;justify-content:center;gap:12px;background:#FF3D81;border:5px solid #14112F;border-radius:26px;box-shadow:0 7px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:28px;-webkit-text-stroke:4px #14112F;paint-order:stroke fill;animation:phPulse 1.4s ease-in-out infinite" style-active="transform:translateY(6px);box-shadow:0 1px 0 #14112F"><dc-import name="Sprite" icon="hourglass" size="36" hint-size="36px,36px"></dc-import>丟沙漏給 Momo！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 RESULT -->
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;align-items:center;gap:14px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:12px;padding:0 14px">P5</span>結算</div>
+      <div data-screen-label="P5 結算" style="position:relative;width:390px;height:844px;overflow:hidden;border-radius:52px;border:8px solid #14112F;box-shadow:0 14px 0 #000;background:#1E1B4B">
+        <div style="position:absolute;left:50%;top:230px;width:640px;height:640px;margin:-320px 0 0 -320px;border-radius:50%;background:repeating-conic-gradient(rgba(255,210,63,.18) 0 10deg,transparent 10deg 20deg);animation:phSpin 16s linear infinite"></div>
+        <div style="position:relative;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:700 16px 'Fredoka',sans-serif"><span>9:41</span><span>●●● ▮</span></div>
+        <div style="position:relative;padding:6px 20px 24px;height:776px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="display:flex;align-items:center;gap:10px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:46px;-webkit-text-stroke:6px #14112F;paint-order:stroke fill"><dc-import name="Sprite" icon="trophy" variant="silver" size="54" hint-size="54px,54px"></dc-import>第 2 名！</div>
+          <dc-import name="Avatar" kind="0" mood="score" size="170" hint-size="170px,170px"></dc-import>
+          <div style="font:700 54px 'Fredoka',sans-serif;line-height:1;color:#FFD23F;-webkit-text-stroke:6px #14112F;paint-order:stroke fill">8,420</div>
+          <div style="font-size:16px;font-weight:800;color:#C9CCE8">距離第 1 名 只差 1,440 分</div>
+          <div style="align-self:stretch;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:4px">
+            <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+              <div style="padding:12px;background:#FFFFFF;color:#14112F;border:4px solid #14112F;border-radius:20px;box-shadow:0 5px 0 #14112F;display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:900;color:#5B54C9"><dc-import name="Sprite" icon="{{ s.icon }}" variant="{{ s.v }}" size="22" hint-size="22px,22px"></dc-import>{{ s.t }}</div>
+                <div style="font:700 22px 'Fredoka',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.val }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:1"></div>
+          <div style="align-self:stretch;height:70px;display:flex;align-items:center;justify-content:center;background:#FF3D81;border:5px solid #14112F;border-radius:24px;box-shadow:0 7px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:28px;-webkit-text-stroke:4px #14112F;paint-order:stroke fill">再玩一局</div>
+          <div style="align-self:stretch;height:54px;display:flex;align-items:center;justify-content:center;border:4px solid #FFFFFF;border-radius:20px;font-size:18px;font-weight:900">離開房間</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic{
+ renderVals(){
+  const code=['P','Q','7',''].map((v,i)=>({v,caret:i===3,bg:i===3?'#FFF8D6':'#FFFFFF',border:i===3?'5px dashed #FFD23F':'4px solid #14112F'}));
+  const pick=Array.from({length:12},(_,k)=>({k,sel:k===0,mood:k===0?'score':'normal',bg:k===0?'rgba(46,230,214,.25)':'#2C2870',border:k===0?'4px solid #2EE6D6':'4px solid #14112F'}));
+  const items=[
+   {icon:'hourglass',t:'縮時沙漏',d:'對手 -3 秒',n:'×2',bg:'#FFD23F',fg:'#14112F',border:'5px solid #14112F',cd:false,op:1},
+   {icon:'lock',t:'封鎖鎖頭',d:'封鎖一個字母',n:'×1',bg:'#2C2870',fg:'#FFFFFF',border:'4px solid #14112F',cd:false,op:1},
+   {icon:'shield',t:'應援護盾',d:'送給喜歡的人',n:'×1',bg:'#2C2870',fg:'#FFFFFF',border:'4px solid #14112F',cd:true,op:1},
+   {icon:'star2x',t:'雙倍星星',d:'僅存活玩家',n:'×0',bg:'#2C2870',fg:'#FFFFFF',border:'4px dashed #8D8AB8',cd:false,op:.45}];
+  const tg=[['Momo',8],['阿傑',11],['Kiki',2],['大雄',1],['Leo',9]];
+  const targets=tg.map((t,i)=>({n:t[0],k:t[1],border:i===0?'4px solid #FFD23F':'4px solid #14112F'}));
+  const stats=[{icon:'star',v:'',t:'最長單字',val:'SUNSHINE'},{icon:'flame',v:'3',t:'最高連擊',val:'×7'},{icon:'check',v:'',t:'成功單字',val:'18 個'},{icon:'hourglass',v:'',t:'道具使用',val:'2 次'}];
+  return {code,pick,joined:[11,2,1,8,3],items,targets,stats};
+ }
+}
+</script>
+</body>
+</html>

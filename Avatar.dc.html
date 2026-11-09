@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:{{ size }}px;height:{{ size }}px;flex:none;filter:{{ filter }}">{{ art }}</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:160,&quot;height&quot;:160},&quot;kind&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:11,&quot;tsType&quot;:&quot;number&quot;},&quot;mood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;normal&quot;,&quot;score&quot;,&quot;bombed&quot;,&quot;out&quot;],&quot;default&quot;:&quot;normal&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:96,&quot;tsType&quot;:&quot;number&quot;}}">
+const K='#14112F';
+const KINDS=[{id:'cat',c:'#FF3D81'},{id:'bear',c:'#FFB98A'},{id:'bunny',c:'#FFFFFF'},{id:'frog',c:'#9AF5EC'},{id:'robot',c:'#C9CCE8'},{id:'alien',c:'#A79BFF'},{id:'ghost',c:'#F4F1FF'},{id:'octo',c:'#FF8FB5'},{id:'chick',c:'#FFD23F'},{id:'dino',c:'#2EE6D6'},{id:'penguin',c:'#6A62E0'},{id:'fox',c:'#FF8A3D'}];
+const S=w=>`stroke="${K}" stroke-width="${w||5}" stroke-linejoin="round" stroke-linecap="round"`;
+function star(cx,cy,R,r,n){const p=[];for(let i=0;i<n*2;i++){const a=(-90+i*180/n)*Math.PI/180,q=i%2?r:R;p.push((cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1))}return p.join(' ')}
+function draw(idx,mood){
+ const k=KINDS[((idx%12)+12)%12],c=k.c;
+ let back='',head=`<ellipse cx="60" cy="68" rx="40" ry="36" fill="${c}" ${S()}/>`,front='',ey=64,dx=15,my=82,sclera=false;
+ switch(k.id){
+  case 'cat':back=`<path d="M24 58 L28 16 L56 38Z" fill="${c}" ${S()}/><path d="M96 58 L92 16 L64 38Z" fill="${c}" ${S()}/><path d="M32 44 L33 27 L46 37Z" fill="#FFD0E0"/><path d="M88 44 L87 27 L74 37Z" fill="#FFD0E0"/>`;front=`<path d="M14 74 H32 M15 84 L32 79 M106 74 H88 M105 84 L88 79" ${S(3)}/>`;break;
+  case 'bear':back=`<circle cx="32" cy="38" r="15" fill="${c}" ${S()}/><circle cx="88" cy="38" r="15" fill="${c}" ${S()}/><circle cx="32" cy="38" r="7" fill="#FFE3CF"/><circle cx="88" cy="38" r="7" fill="#FFE3CF"/>`;front=`<ellipse cx="60" cy="84" rx="16" ry="12" fill="#FFE3CF" ${S(4)}/><ellipse cx="60" cy="78" rx="5.5" ry="4" fill="${K}"/>`;my=86;break;
+  case 'bunny':back=`<ellipse cx="44" cy="26" rx="11" ry="27" transform="rotate(-12 44 26)" fill="${c}" ${S()}/><ellipse cx="76" cy="26" rx="11" ry="27" transform="rotate(12 76 26)" fill="${c}" ${S()}/><ellipse cx="44" cy="28" rx="5" ry="17" transform="rotate(-12 44 28)" fill="#FFC2D8"/><ellipse cx="76" cy="28" rx="5" ry="17" transform="rotate(12 76 28)" fill="#FFC2D8"/>`;break;
+  case 'frog':back=`<circle cx="40" cy="42" r="17" fill="${c}" ${S()}/><circle cx="80" cy="42" r="17" fill="${c}" ${S()}/>`;ey=42;dx=20;sclera=true;my=84;break;
+  case 'robot':back=`<path d="M60 34 V14" ${S(5)}/><circle cx="60" cy="12" r="7" fill="#FF3D81" ${S(4)}/><rect x="8" y="56" width="14" height="24" rx="4" fill="#8A86C8" ${S(4)}/><rect x="98" y="56" width="14" height="24" rx="4" fill="#8A86C8" ${S(4)}/>`;head=`<rect x="18" y="32" width="84" height="70" rx="18" fill="${c}" ${S()}/>`;break;
+  case 'alien':back=`<path d="M46 38 Q38 22 30 12 M74 38 Q82 22 90 12" fill="none" ${S(5)}/><circle cx="30" cy="12" r="7" fill="#FFD23F" ${S(4)}/><circle cx="90" cy="12" r="7" fill="#FFD23F" ${S(4)}/>`;head=`<ellipse cx="60" cy="68" rx="44" ry="36" fill="${c}" ${S()}/>`;sclera=true;dx=17;break;
+  case 'ghost':head=`<path d="M20 102 V64 C20 40 38 26 60 26 C82 26 100 40 100 64 V102 L90 94 L80 102 L70 94 L60 102 L50 94 L40 102 L30 94 Z" fill="${c}" ${S()}/>`;ey=60;my=78;break;
+  case 'octo':back=[28,46,64,82].map(x=>`<path d="M${x+4} 86 q-10 14 2 24" fill="none" stroke="${K}" stroke-width="16" stroke-linecap="round"/><path d="M${x+4} 86 q-10 14 2 24" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round"/>`).join('');head=`<ellipse cx="60" cy="62" rx="40" ry="36" fill="${c}" ${S()}/>`;ey=60;my=78;break;
+  case 'chick':back=`<path d="M54 34 Q50 14 61 19 Q66 8 71 24 Q68 32 63 34Z" fill="${c}" ${S(4)}/><ellipse cx="20" cy="78" rx="9" ry="15" transform="rotate(20 20 78)" fill="${c}" ${S(4)}/><ellipse cx="100" cy="78" rx="9" ry="15" transform="rotate(-20 100 78)" fill="${c}" ${S(4)}/>`;front=`<path d="M52 74 L68 74 L60 83Z" fill="#FF8A3D" ${S(3)}/>`;my=90;break;
+  case 'dino':back=`<path d="M32 44 L38 20 L52 34Z" fill="#FFD23F" ${S(4)}/><path d="M48 33 L60 9 L72 33Z" fill="#FFD23F" ${S(4)}/><path d="M68 34 L82 20 L88 44Z" fill="#FFD23F" ${S(4)}/>`;front=`<circle cx="54" cy="78" r="2" fill="${K}"/><circle cx="66" cy="78" r="2" fill="${K}"/>`;my=86;break;
+  case 'penguin':head=`<ellipse cx="60" cy="66" rx="40" ry="40" fill="${c}" ${S()}/>`;front=`<path d="M60 46 C46 38 28 50 30 68 C32 88 46 100 60 100 C74 100 88 88 90 68 C92 50 74 38 60 46Z" fill="#fff"/><path d="M53 76 L67 76 L60 84Z" fill="#FF8A3D" ${S(3)}/>`;my=90;break;
+  case 'fox':back=`<path d="M24 60 L22 12 L56 36Z" fill="${c}" ${S()}/><path d="M96 60 L98 12 L64 36Z" fill="${c}" ${S()}/><path d="M30 46 L29 25 L45 37Z" fill="#fff"/><path d="M90 46 L91 25 L75 37Z" fill="#fff"/>`;front=`<path d="M21 72 Q42 68 54 92 Q32 100 22 82Z" fill="#fff"/><path d="M99 72 Q78 68 66 92 Q88 100 98 82Z" fill="#fff"/><ellipse cx="60" cy="82" rx="5" ry="4" fill="${K}"/>`;my=88;break;
+ }
+ let eyes='';
+ [60-dx,60+dx].forEach(x=>{const y=ey;const scl=sclera?`<circle cx="${x}" cy="${y}" r="10" fill="#fff" ${S(3.5)}/>`:'';
+  if(mood==='score')eyes+=scl+`<path d="M${x-7} ${y+2} Q${x} ${y-8} ${x+7} ${y+2}" fill="none" ${S(4.5)}/>`;
+  else if(mood==='bombed')eyes+=`<circle cx="${x}" cy="${y}" r="9.5" fill="#fff" ${S(3.5)}/><circle cx="${x+(x<60?2.5:-2.5)}" cy="${y+1}" r="2.6" fill="${K}"/>`;
+  else if(mood==='out')eyes+=`<path d="M${x-6} ${y-6} L${x+6} ${y+6} M${x+6} ${y-6} L${x-6} ${y+6}" ${S(4.5)}/>`;
+  else eyes+=scl+`<ellipse cx="${x}" cy="${y}" rx="5" ry="6" fill="${K}"/><circle cx="${x+1.8}" cy="${y-2.2}" r="1.8" fill="#fff"/>`;
+ });
+ const mouth=mood==='score'?`<path d="M48 ${my-2} Q60 ${my+16} 72 ${my-2} Z" fill="${K}" ${S(3)}/><ellipse cx="60" cy="${my+7}" rx="6" ry="3.2" fill="#FF7AA8"/>`
+  :mood==='bombed'?`<path d="M46 ${my+2} q3.5 -5 7 0 t7 0 t7 0 t7 0" fill="none" ${S(3.5)}/>`
+  :mood==='out'?`<path d="M52 ${my+2} H68" ${S(4)}/>`
+  :`<path d="M52 ${my} Q60 ${my+7} 68 ${my}" fill="none" ${S(4)}/>`;
+ const cy=k.id==='frog'?76:ey+15;
+ const cheeks=mood==='out'?'':`<ellipse cx="${60-dx-7}" cy="${cy}" rx="6.5" ry="4.5" fill="#FF7AA8" opacity=".6"/><ellipse cx="${60+dx+7}" cy="${cy}" rx="6.5" ry="4.5" fill="#FF7AA8" opacity=".6"/>`;
+ let extra='';
+ if(mood==='score')extra=`<polygon points="${star(12,30,11,4,4)}" fill="#FFD23F" ${S(2.5)}/><polygon points="${star(108,20,9,3.4,4)}" fill="#FFD23F" ${S(2.5)}/><polygon points="${star(106,98,6,2.4,4)}" fill="#2EE6D6" ${S(2)}/>`;
+ if(mood==='bombed')extra=`<ellipse cx="42" cy="90" rx="11" ry="5" fill="${K}" opacity=".35"/><ellipse cx="80" cy="50" rx="9" ry="4.5" fill="${K}" opacity=".3"/><circle cx="24" cy="22" r="10" fill="#B9B6D9" ${S(3)}/><circle cx="38" cy="11" r="7" fill="#B9B6D9" ${S(3)}/><circle cx="96" cy="16" r="9" fill="#B9B6D9" ${S(3)}/><path d="M60 22 l-4 -8 M70 24 l4 -8 M50 24 l-7 -5" ${S(3)}/>`;
+ const hi=`<ellipse cx="42" cy="48" rx="10" ry="6" fill="#fff" opacity=".55" transform="rotate(-25 42 48)"/>`;
+ return `<svg viewBox="0 0 120 120" width="100%" height="100%" style="overflow:visible;display:block">${back}${head}${hi}${front}${cheeks}${eyes}${mouth}${extra}</svg>`;
+}
+class Component extends DCLogic{
+ renderVals(){
+  const mood=this.props.mood??'normal',s=Number(this.props.size??96);
+  return {size:s,filter:mood==='out'?'grayscale(1) brightness(.92)':'none',art:React.createElement('span',{style:{display:'block',width:'100%',height:'100%'},dangerouslySetInnerHTML:{__html:draw(Number(this.props.kind??0),mood)}})};
+ }
+}
+</script>
+</body>
+</html>

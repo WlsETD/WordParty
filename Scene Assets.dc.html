@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Huninn&family=Nunito:wght@600;700;800;900&family=Noto+Sans+TC:wght@500;700;900&display=swap">
+<style>body{margin:0;background:#1E1B4B}a{color:#2EE6D6}a:hover{color:#FFD23F}
+@keyframes saFlicker{0%,100%{transform:scale(1,1)}50%{transform:scale(.92,1.1)}}
+@keyframes saFall{0%{transform:translateY(-20px) rotate(0)}100%{transform:translateY(40px) rotate(540deg)}}
+@keyframes saSpin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div style="max-width:1500px;margin:0 auto;padding:72px 40px 120px;display:flex;flex-direction:column;gap:72px;font-family:'Nunito','Noto Sans TC',sans-serif;color:#FFFFFF">
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:72px;line-height:1;-webkit-text-stroke:8px #14112F;paint-order:stroke fill;text-shadow:0 8px 0 #14112F">場景素材</div>
+      <div style="font-size:20px;font-weight:700;color:#C9CCE8">全部為向量元件，可任意縮放；每個物件皆提供多種狀態。</div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:18px;font-weight:900">
+      <a href="Design System.dc.html" style="padding:10px 20px;border:4px solid #2EE6D6;border-radius:999px;text-decoration:none">設計系統</a>
+      <a href="TV Screens.dc.html" style="padding:10px 20px;border:4px solid #2EE6D6;border-radius:999px;text-decoration:none">主畫面 TV</a>
+      <a href="Phone Screens.dc.html" style="padding:10px 20px;border:4px solid #2EE6D6;border-radius:999px;text-decoration:none">手機端</a>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">01 · 炸彈（6 狀態）</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px">
+      <sc-for list="{{ bombs }}" as="b" hint-placeholder-count="6">
+        <div style="padding:20px 14px;background:{{ b.bg }};border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="height:190px;display:grid;place-items:center"><dc-import name="Bomb" stage="{{ b.s }}" size="180" hint-size="180px,180px"></dc-import></div>
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:24px">{{ b.t }}</div>
+          <div style="font-size:14px;font-weight:700;color:#C9CCE8;text-align:center;line-height:1.4">{{ b.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">02 · 引信與火花</div>
+    <div style="display:flex;flex-wrap:wrap;gap:18px">
+      <sc-for list="{{ sparks }}" as="s" hint-placeholder-count="3">
+        <div style="width:200px;padding:20px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="animation:saFlicker .16s steps(2) infinite alternate"><dc-import name="Sprite" icon="spark" variant="{{ s.v }}" size="96" hint-size="96px,96px"></dc-import></div>
+          <div style="font-size:17px;font-weight:900">{{ s.t }}</div>
+        </div>
+      </sc-for>
+      <div style="flex:1;min-width:320px;padding:22px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;gap:10px;font-size:16px;font-weight:700;color:#C9CCE8;line-height:1.55">
+        <div style="font-size:20px;font-weight:900;color:#FFFFFF">引信規格</div>
+        <div>· 墨色外描 10px ＋ 麻繩色 #FFE3B0 4px 虛線（5/4），呈現編織感。</div>
+        <div>· 長度：待機 100% → 72% → 46% → 22% → 危急 6%，火花永遠在末端。</div>
+        <div>· 火花三幀 a / b / c 以 160ms steps(2) 交替（危急 90ms），周圍飄 2 顆火星。</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">03 · 玩家頭像（12 款 × 4 表情）</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">
+      <sc-for list="{{ avatars }}" as="a" hint-placeholder-count="12">
+        <div style="padding:16px;background:#2C2870;border:5px solid #14112F;border-radius:26px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:24px">{{ a.name }}</span><span style="font-size:14px;font-weight:800;color:#C9CCE8">{{ a.sp }} · #{{ a.k }}</span></div>
+          <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+            <sc-for list="{{ a.moods }}" as="m" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+                <dc-import name="Avatar" kind="{{ a.k }}" mood="{{ m.m }}" size="70" hint-size="70px,70px"></dc-import>
+                <div style="font-size:13px;font-weight:800;color:#C9CCE8">{{ m.t }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:24px">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">04 · 字母方塊</div>
+      <div style="padding:28px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-wrap:wrap;gap:30px">
+        <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+            <dc-import name="LetterTile" letter="{{ t.l }}" variant="{{ t.v }}" size="96" hint-size="96px,96px"></dc-import>
+            <div style="font-size:16px;font-weight:900">{{ t.t }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">05 · 單字鏈連接環</div>
+      <div style="padding:28px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;flex-wrap:wrap;gap:14px">
+          <sc-for list="{{ links }}" as="l" hint-placeholder-count="5">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><dc-import name="Sprite" icon="link" variant="{{ l.v }}" size="72" hint-size="72px,72px"></dc-import><div style="font-size:14px;font-weight:800;color:#C9CCE8">{{ l.t }}</div></div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;flex-wrap:wrap">
+          <div style="height:64px;padding:0 18px;display:flex;align-items:center;background:#FFFFFF;color:#14112F;border:5px solid #14112F;border-radius:20px;box-shadow:0 5px 0 #14112F;font:700 30px 'Fredoka',sans-serif">CA<span style="padding:0 5px;background:#FFD23F;border:3px solid #14112F;border-radius:7px">T</span></div>
+          <div style="margin:0 -10px"><dc-import name="Sprite" icon="link" variant="c" size="52" hint-size="52px,52px"></dc-import></div>
+          <div style="height:64px;padding:0 18px;display:flex;align-items:center;background:#FFFFFF;color:#14112F;border:5px solid #14112F;border-radius:20px;box-shadow:0 5px 0 #14112F;font:700 30px 'Fredoka',sans-serif">TRE<span style="padding:0 5px;background:#FFD23F;border:3px solid #14112F;border-radius:7px">E</span></div>
+          <div style="margin:0 -10px"><dc-import name="Sprite" icon="link" variant="c" size="52" hint-size="52px,52px"></dc-import></div>
+          <div style="height:64px;padding:0 18px;display:flex;align-items:center;border:5px dashed #FFD23F;border-radius:20px;font:700 30px 'Fredoka',sans-serif;color:#FFD23F">E ?</div>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:#C9CCE8">隊伍模式用洋紅 / 青環；合作模式統一青環；下一格為黃虛線待接格。</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">06 · 道具圖示</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px">
+      <sc-for list="{{ items }}" as="i" hint-placeholder-count="4">
+        <div style="padding:22px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;align-items:center;gap:18px">
+          <div style="width:110px;height:110px;flex:none;display:grid;place-items:center;background:#1E1B4B;border:4px solid #14112F;border-radius:26px"><dc-import name="Sprite" icon="{{ i.icon }}" size="84" hint-size="84px,84px"></dc-import></div>
+          <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:26px">{{ i.t }}</div><div style="font-size:15px;font-weight:700;color:#C9CCE8;line-height:1.45">{{ i.d }}</div></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">07 · 狀態物件</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
+        <div style="padding:22px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;gap:14px">
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:26px">{{ g.t }}</div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
+            <sc-for list="{{ g.list }}" as="x" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+                <div style="transform-origin:bottom;animation:{{ x.anim }}"><dc-import name="Sprite" icon="{{ x.icon }}" variant="{{ x.v }}" size="{{ x.s }}" hint-size="64px,64px"></dc-import></div>
+                <div style="font-size:14px;font-weight:800;color:#C9CCE8">{{ x.t }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <div style="padding:22px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:26px">彩帶 Confetti</div>
+        <div style="position:relative;height:96px;display:flex;gap:16px;align-items:center">
+          <sc-for list="{{ confetti }}" as="c" hint-placeholder-count="8">
+            <div style="width:{{ c.w }}px;height:{{ c.h }}px;background:{{ c.c }};border:3px solid #14112F;border-radius:{{ c.r }};animation:saFall {{ c.dur }}s {{ c.delay }}s linear infinite alternate"></div>
+          </sc-for>
+        </div>
+        <div style="font-size:14px;font-weight:800;color:#C9CCE8">5 色 × 長方 / 圓點，描邊 3px</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">08 · 背景：派對舞台</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(732px,1fr));gap:24px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="position:relative;width:720px;height:405px;overflow:hidden;border:6px solid #14112F;border-radius:28px;box-shadow:0 10px 0 #14112F">
+          <div style="position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;transform:scale(.375)"><dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import></div>
+        </div>
+        <div style="font-size:18px;font-weight:900">大廳版 · 歡樂</div>
+        <div style="font-size:15px;font-weight:700;color:#C9CCE8;line-height:1.5">彩旗＋暖白燈泡、白色聚光燈 6s 慢掃、兩側糖果氣球漂浮、圓弧舞台地板。</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="position:relative;width:720px;height:405px;overflow:hidden;border:6px solid #14112F;border-radius:28px;box-shadow:0 10px 0 #14112F">
+          <div style="position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;transform:scale(.375)"><dc-import name="StageBG" mood="tense" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import></div>
+        </div>
+        <div style="font-size:18px;font-weight:900">緊張版 · 炸彈模式</div>
+        <div style="font-size:15px;font-weight:700;color:#C9CCE8;line-height:1.5">只剩紅橙燈泡 0.5s 急閃、洋紅聚光 2.4s 快掃、火星上飄、警示斜紋地帶、暗角＋紅色脈動。</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic{
+ renderVals(){
+  const bombs=[['idle','待機','引信完整，緩慢搖擺 2s'],['fuse1','引信 1 階','剩 72%，表情如常'],['fuse2','引信 2 階','剩 46%，皺眉'],['fuse3','引信 3 階','剩 22%，冒汗、搖擺 0.6s'],['critical','即將爆炸','發紅＋光暈＋90ms 抖動'],['boom','爆炸','星爆 BOOM! 450ms 彈出']].map((b,i)=>({s:b[0],t:b[1],d:b[2],bg:i>=4?'#3A1640':'#2C2870'}));
+  const sparks=[{v:'a',t:'火花 A · 四角星'},{v:'b',t:'火花 B · 八角爆'},{v:'c',t:'火花 C · 白閃'}];
+  const names=[['咪咪','貓'],['熊熊','熊'],['跳跳','兔'],['呱呱','青蛙'],['嗶嗶','機器人'],['啾比','外星人'],['飄飄','幽靈'],['八爪','章魚'],['啾啾','小雞'],['小恐','恐龍'],['企企','企鵝'],['狐狐','狐狸']];
+  const M=[['normal','正常'],['score','得分'],['bombed','被炸'],['out','淘汰']];
+  const avatars=names.map((n,k)=>({k,name:n[0],sp:n[1],moods:M.map(m=>({m:m[0],t:m[1]}))}));
+  const tiles=[['A','normal','普通'],['Y','glow','發光（結尾）'],['E','locked','鎖定（封鎖）'],['S','active','輸入中'],['T','used','已接上']].map(t=>({l:t[0],v:t[1],t:t[2]}));
+  const links=[['y','預設'],['c','合作 / 青隊'],['m','洋紅隊'],['o','陷阱'],['w','待接']].map(l=>({v:l[0],t:l[1]}));
+  const items=[{icon:'hourglass',t:'縮時沙漏',d:'目標玩家本回合剩餘時間 −3 秒。'},{icon:'lock',t:'封鎖鎖頭',d:'封鎖一個字母，下一位不可使用。'},{icon:'shield',t:'護盾',d:'抵擋一次爆炸或一次錯誤。'},{icon:'star2x',t:'雙倍星星',d:'下一個單字得分 ×2。'}];
+  const x=(icon,v,t,s,anim)=>({icon,v,t,s:s||64,anim:anim||'none'});
+  const fl='saFlicker .4s ease-in-out infinite alternate';
+  const groups=[
+   {t:'命數心形',list:[x('heart','full','有命'),x('heart','lost','剛失去'),x('heart','empty','空')]},
+   {t:'連擊火焰',list:[x('flame','1','×1–2',48,fl),x('flame','2','×3–5',58,fl),x('flame','3','×6+',70,fl)]},
+   {t:'皇冠',list:[x('crown','','第一名',80)]},
+   {t:'獎盃',list:[x('trophy','gold','金',76),x('trophy','silver','銀',66),x('trophy','bronze','銅',58)]},
+   {t:'氣球',list:[x('balloon','m','洋紅',64),x('balloon','y','黃',64),x('balloon','c','青',64),x('balloon','o','橙',64)]},
+   {t:'模式圖示',list:[x('zap','','閃電',52),x('target','','精準',52),x('bomb','','炸彈',52),x('out','','淘汰',52),x('team','','組隊',52),x('coop','','合作',52),x('trap','','陷阱',52)]},
+   {t:'回饋圖示',list:[x('check','','正確',52),x('cross','','錯誤',52),x('slot','','空位',52),x('clock','','計時',52),x('flag','','終點',52),x('star','','里程碑',52)]}];
+  const CC=['#FF3D81','#FFD23F','#2EE6D6','#FF8A3D','#FFFFFF'];
+  const confetti=Array.from({length:10},(_,i)=>({w:i%2?14:20,h:i%2?28:20,r:i%2?'4px':'50%',c:CC[i%5],dur:(1.2+(i%3)*.3).toFixed(1),delay:(i*.15).toFixed(2)}));
+  return {bombs,sparks,avatars,tiles,links,items,groups,confetti};
+ }
+}
+</script>
+</body>
+</html>

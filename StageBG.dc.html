@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>@keyframes sbSweepL{0%{transform:rotate(-16deg)}100%{transform:rotate(12deg)}}@keyframes sbSweepR{0%{transform:rotate(16deg)}100%{transform:rotate(-12deg)}}@keyframes sbFloat{0%{transform:translateY(0) rotate(-3deg)}100%{transform:translateY(-20px) rotate(3deg)}}@keyframes sbTwinkle{0%,100%{opacity:1}50%{opacity:.3}}@keyframes sbPulse{0%,100%{opacity:.3}50%{opacity:.75}}@keyframes sbEmber{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-620px);opacity:0}}</style></helmet>
+<div style="position:absolute;inset:0;overflow:hidden;background:{{ base }}">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 3px,transparent 4px);background-size:56px 56px"></div>
+  <div style="position:absolute;left:14%;top:-40px;width:560px;height:1180px;margin-left:-280px;transform-origin:50% 0;clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);background:{{ cone }};animation:sbSweepL {{ sweep }} ease-in-out infinite alternate"></div>
+  <div style="position:absolute;left:86%;top:-40px;width:560px;height:1180px;margin-left:-280px;transform-origin:50% 0;clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);background:{{ cone }};animation:sbSweepR {{ sweep }} ease-in-out infinite alternate"></div>
+  <div style="position:absolute;left:0;top:0;width:100%;height:240px">{{ garland }}</div>
+  <div style="position:absolute;left:-10%;width:120%;bottom:-300px;height:460px;border-radius:50%;background:{{ floor }};border-top:6px solid #14112F;box-shadow:inset 0 30px 0 rgba(255,255,255,.07)"></div>
+  <div style="position:absolute;left:-5%;width:110%;bottom:-250px;height:360px;border-radius:50%;border:4px dashed rgba(255,255,255,.12)"></div>
+  <sc-if value="{{ lobby }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;left:30px;bottom:150px;display:flex;align-items:flex-end;gap:0">
+      <div style="animation:sbFloat 3.4s ease-in-out infinite alternate"><dc-import name="Sprite" icon="balloon" variant="m" size="150" hint-size="150px,150px"></dc-import></div>
+      <div style="margin-left:-40px;margin-bottom:60px;animation:sbFloat 3s .4s ease-in-out infinite alternate"><dc-import name="Sprite" icon="balloon" variant="y" size="120" hint-size="120px,120px"></dc-import></div>
+      <div style="margin-left:-30px;margin-bottom:-10px;animation:sbFloat 3.8s .8s ease-in-out infinite alternate"><dc-import name="Sprite" icon="balloon" variant="c" size="110" hint-size="110px,110px"></dc-import></div>
+    </div>
+    <div style="position:absolute;right:30px;bottom:150px;display:flex;align-items:flex-end">
+      <div style="margin-bottom:-10px;animation:sbFloat 3.6s .2s ease-in-out infinite alternate"><dc-import name="Sprite" icon="balloon" variant="o" size="120" hint-size="120px,120px"></dc-import></div>
+      <div style="margin-left:-30px;margin-bottom:70px;animation:sbFloat 3.2s .6s ease-in-out infinite alternate"><dc-import name="Sprite" icon="balloon" variant="c" size="140" hint-size="140px,140px"></dc-import></div>
+      <div style="margin-left:-44px;animation:sbFloat 3.9s 1s ease-in-out infinite alternate"><dc-import name="Sprite" icon="balloon" variant="m" size="130" hint-size="130px,130px"></dc-import></div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ tense }}" hint-placeholder-val="{{ false }}">
+    <sc-for list="{{ embers }}" as="e" hint-placeholder-count="0">
+      <div style="position:absolute;bottom:120px;left:{{ e.left }}%;width:{{ e.s }}px;height:{{ e.s }}px;border-radius:50%;background:{{ e.c }};box-shadow:0 0 12px {{ e.c }};animation:sbEmber {{ e.dur }}s {{ e.delay }}s linear infinite"></div>
+    </sc-for>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:44px;border-top:5px solid #14112F;background:repeating-linear-gradient(-45deg,#FFD23F 0 30px,#14112F 30px 60px)"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(255,61,129,.45) 100%);animation:sbPulse 1.1s ease-in-out infinite"></div>
+    <div style="position:absolute;inset:0;box-shadow:inset 0 0 260px rgba(5,3,20,.85)"></div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:540},&quot;mood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;lobby&quot;,&quot;tense&quot;],&quot;default&quot;:&quot;lobby&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const K='#14112F',CL=['#FF3D81','#FFD23F','#2EE6D6','#FF8A3D','#FFFFFF'];
+function garland(tense){
+ const pts=[];for(let x=0;x<=1920;x+=60){const l=(x%960)/960;pts.push([x,24+(x%960===0&&x>0?0:120*4*l*(1-l))]);}
+ let s=`<path d="M${pts.map(p=>p.join(' ')).join(' L')}" fill="none" stroke="${K}" stroke-width="5"/>`;
+ pts.forEach((p,i)=>{
+  if(!tense&&i%2===0&&i<pts.length-1){const q=pts[i+1],c=CL[(i/2)%5];s+=`<path d="M${p[0]+3} ${p[1]} L${q[0]-3} ${q[1]} L${(p[0]+q[0])/2} ${(p[1]+q[1])/2+72}Z" fill="${c}" stroke="${K}" stroke-width="4" stroke-linejoin="round"/>`;}
+  else{const c=tense?(i%3?'#FF3D81':'#FF8A3D'):'#FFF3B8';s+=`<circle cx="${p[0]}" cy="${p[1]+14}" r="24" fill="${c}" opacity=".25" style="animation:sbTwinkle ${tense?.5:1.6}s ${(i%4)*.2}s infinite"/><rect x="${p[0]-6}" y="${p[1]-2}" width="12" height="8" fill="#8A86C8" stroke="${K}" stroke-width="3"/><circle cx="${p[0]}" cy="${p[1]+14}" r="11" fill="${c}" stroke="${K}" stroke-width="4" style="animation:sbTwinkle ${tense?.5:1.6}s ${(i%4)*.2}s infinite"/>`;}
+ });
+ return s;
+}
+class Component extends DCLogic{
+ renderVals(){
+  const tense=(this.props.mood??'lobby')==='tense';
+  const embers=tense?Array.from({length:16},(_,i)=>({left:(i*6.3+3)%100,s:6+(i%3)*3,c:i%2?'#FF8A3D':'#FFD23F',dur:3+(i%4)*.7,delay:(i*.37)%3})):[];
+  return {lobby:!tense,tense,embers,
+   base:tense?'radial-gradient(ellipse at 50% 100%,#5A1846 0%,#1E1B4B 55%,#0F0C2B 100%)':'radial-gradient(ellipse at 50% 110%,#3B3496 0%,#1E1B4B 62%)',
+   cone:tense?'linear-gradient(to bottom,rgba(255,61,129,.42),rgba(255,61,129,0) 85%)':'linear-gradient(to bottom,rgba(255,255,255,.26),rgba(255,255,255,0) 85%)',
+   sweep:tense?'2.4s':'6s',floor:tense?'#3A1640':'#2C2870',
+   garland:React.createElement('span',{style:{display:'block',width:'100%',height:'100%'},dangerouslySetInnerHTML:{__html:`<svg viewBox="0 0 1920 240" width="100%" height="100%" preserveAspectRatio="none" style="display:block;overflow:visible">${garland(tense)}</svg>`}})};
+ }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>@keyframes bSpark{from{transform:scale(.75) rotate(0deg)}to{transform:scale(1.3) rotate(25deg)}}@keyframes bWobble{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}@keyframes bShake{0%{transform:translate(0,0)}25%{transform:translate(-5px,2px)}50%{transform:translate(4px,-3px)}75%{transform:translate(-3px,-2px)}100%{transform:translate(0,0)}}@keyframes bBoom{0%{transform:scale(.2)}45%{transform:scale(1.2)}100%{transform:scale(1)}}</style></helmet>
+<div style="width:{{ size }}px;height:{{ size }}px;flex:none;animation:{{ anim }};filter:{{ filter }}">{{ art }}</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:240,&quot;height&quot;:240},&quot;stage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;idle&quot;,&quot;fuse1&quot;,&quot;fuse2&quot;,&quot;fuse3&quot;,&quot;critical&quot;,&quot;boom&quot;],&quot;default&quot;:&quot;idle&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:200,&quot;tsType&quot;:&quot;number&quot;}}">
+const K='#14112F',Y='#FFD23F',O='#FF8A3D',M='#FF3D81';
+const S=w=>`stroke="${K}" stroke-width="${w||5}" stroke-linejoin="round" stroke-linecap="round"`;
+function star(cx,cy,R,r,n,rot){rot=rot??-90;const p=[];for(let i=0;i<n*2;i++){const a=(rot+i*180/n)*Math.PI/180,q=i%2?r:R;p.push((cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1))}return p.join(' ')}
+const P=[[116,42],[130,8],[158,40],[156,6]];
+const bz=t=>{const u=1-t;return [0,1].map(j=>u*u*u*P[0][j]+3*u*u*t*P[1][j]+3*u*t*t*P[2][j]+t*t*t*P[3][j])};
+const FR={idle:1,fuse1:.72,fuse2:.46,fuse3:.22,critical:.06};
+function draw(st){
+ if(st==='boom'){
+  return `<polygon points="${star(85,85,84,50,12,-80)}" fill="${Y}" ${S(6)}/><polygon points="${star(85,85,60,36,10)}" fill="${O}" ${S(5)}/><circle cx="85" cy="85" r="28" fill="${M}" ${S(5)}/><text x="85" y="96" text-anchor="middle" font-family="Fredoka,sans-serif" font-weight="700" font-size="34" fill="#fff" stroke="${K}" stroke-width="7" paint-order="stroke">BOOM!</text><circle cx="18" cy="30" r="7" fill="#2C2870" ${S(3)}/><circle cx="152" cy="140" r="9" fill="#2C2870" ${S(3)}/><polygon points="${star(150,26,10,4,4)}" fill="#fff" ${S(3)}/><polygon points="${star(20,146,9,3.5,4)}" fill="#fff" ${S(3)}/>`;
+ }
+ const f=FR[st]??1,crit=st==='critical';
+ const n=24,pts=[];for(let i=0;i<=n;i++)pts.push(bz(f*i/n));
+ const d='M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L');
+ const [sx,sy]=pts[pts.length-1];
+ const body=crit?'#C2306A':st==='fuse3'?'#45287A':'#2C2870';
+ const ex=[58,88],ey=98;
+ let face='';
+ ex.forEach(x=>{
+  if(crit)face+=`<ellipse cx="${x}" cy="${ey}" rx="10" ry="12" fill="#fff" ${S(3.5)}/><circle cx="${x}" cy="${ey}" r="2.6" fill="${K}"/>`;
+  else face+=`<ellipse cx="${x}" cy="${ey}" rx="7.5" ry="9.5" fill="#fff" ${S(3.5)}/><circle cx="${x+2}" cy="${ey-3}" r="3.8" fill="${K}"/>`;
+ });
+ if(st==='fuse2'||st==='fuse3'||crit)face+=`<path d="M48 ${ey-18} L64 ${ey-13} M98 ${ey-18} L82 ${ey-13}" ${S(4)}/>`;
+ face+=crit?`<ellipse cx="73" cy="124" rx="9" ry="11" fill="${K}"/>`:st==='fuse3'?`<path d="M60 124 q3.25 -5 6.5 0 t6.5 0 t6.5 0" fill="none" ${S(3.5)}/>`:st==='fuse2'?`<path d="M63 124 H83" ${S(4)}/>`:`<path d="M62 120 Q73 130 84 120" fill="none" ${S(4)}/>`;
+ if(st==='fuse3'||crit)face+=`<path d="M114 78 q8 12 0 16 q-8 -4 0 -16Z" fill="#9AF5EC" ${S(3)}/>`;
+ if(crit)face+=`<path d="M18 70 L6 62 M14 96 L2 96 M22 122 L10 132 M122 132 L134 142" ${S(4)}/><path d="M22 60 q8 12 0 16 q-8 -4 0 -16Z" fill="#9AF5EC" ${S(3)}/>`;
+ return `<path d="${d}" fill="none" stroke="${K}" stroke-width="10" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#FFE3B0" stroke-width="4" stroke-dasharray="5 4" stroke-linecap="round"/>`
+  +`<circle cx="74" cy="100" r="56" fill="${body}" ${S(6)}/><ellipse cx="50" cy="72" rx="15" ry="9" fill="#fff" opacity=".35" transform="rotate(-35 50 72)"/><circle cx="36" cy="88" r="4" fill="#fff" opacity=".35"/>`
+  +`<g transform="rotate(40 110 52)"><rect x="96" y="42" width="28" height="20" rx="5" fill="#8A86C8" ${S(5)}/></g>`+face
+  +`<g style="transform-origin:${sx}px ${sy}px;animation:bSpark ${crit?'.09s':'.16s'} steps(2) infinite alternate"><polygon points="${star(sx,sy,crit?20:15,5,8)}" fill="${Y}" ${S(3)}/><polygon points="${star(sx,sy,8,3,4)}" fill="#fff"/></g><circle cx="${sx+14}" cy="${sy-10}" r="2.5" fill="${O}"/><circle cx="${sx-12}" cy="${sy-14}" r="2" fill="${Y}"/>`;
+}
+class Component extends DCLogic{
+ renderVals(){
+  const st=this.props.stage??'idle',s=Number(this.props.size??200);
+  const anim=st==='critical'?'bShake .09s linear infinite':st==='boom'?'bBoom .45s cubic-bezier(.2,1.4,.4,1) both':st==='fuse3'?'bWobble .6s ease-in-out infinite':'bWobble 2s ease-in-out infinite';
+  return {size:s,anim,filter:st==='critical'?'drop-shadow(0 0 24px rgba(255,61,129,.9))':'none',
+   art:React.createElement('span',{style:{display:'block',width:'100%',height:'100%'},dangerouslySetInnerHTML:{__html:`<svg viewBox="0 0 170 170" width="100%" height="100%" style="overflow:visible;display:block">${draw(st)}</svg>`}})};
+ }
+}
+</script>
+</body>
+</html>

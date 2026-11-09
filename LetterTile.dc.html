@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>@keyframes ltGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12)}}@keyframes ltRing{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.07);opacity:.6}}</style></helmet>
+<div style="position:relative;width:{{ s }}px;height:{{ s }}px;flex:none;transform:rotate({{ tilt }}deg)">
+  <sc-if value="{{ isGlow }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:{{ ring }}px;border:{{ ringW }}px dashed #FFD23F;border-radius:{{ ringR }}px;animation:ltRing 1.4s ease-in-out infinite"></div>
+  </sc-if>
+  <div style="position:absolute;inset:0;border-radius:{{ r }}px;background:{{ bg }};border:{{ bw }}px solid #14112F;box-shadow:{{ shadow }};display:grid;place-items:center;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:{{ fs }}px;line-height:1;color:{{ fg }};animation:{{ anim }};overflow:hidden">
+    <sc-if value="{{ isLocked }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(20,17,47,.45) 0 6px,transparent 6px 14px)"></div>
+    </sc-if>
+    <span style="position:relative">{{ letter }}</span>
+    <div style="position:absolute;left:12%;top:9%;width:28%;height:10%;border-radius:99px;background:rgba(255,255,255,.55)"></div>
+  </div>
+  <sc-if value="{{ isLocked }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;right:{{ lockOff }}px;bottom:{{ lockOff }}px">
+      <dc-import name="Sprite" icon="lock" size="{{ lockS }}" hint-size="40px,40px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:160,&quot;height&quot;:160},&quot;letter&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;normal&quot;,&quot;glow&quot;,&quot;locked&quot;,&quot;active&quot;,&quot;used&quot;],&quot;default&quot;:&quot;normal&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:96,&quot;tsType&quot;:&quot;number&quot;},&quot;tilt&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic{
+ renderVals(){
+  const s=Number(this.props.size??96),v=this.props.variant??'normal';
+  const map={normal:['#FFFFFF','#14112F'],glow:['#FFD23F','#14112F'],locked:['#4A4590','#A5A2CC'],active:['#FF3D81','#FFFFFF'],used:['#2EE6D6','#14112F']};
+  const [bg,fg]=map[v]||map.normal;const sh=Math.max(3,Math.round(s*.07));
+  return {s,bg,fg,r:Math.round(s*.22),bw:Math.max(3,Math.round(s*.05)),fs:Math.round(s*.6),
+   shadow:v==='glow'?`0 ${sh}px 0 #14112F, 0 0 ${Math.round(s*.5)}px rgba(255,210,63,.9)`:`0 ${sh}px 0 #14112F`,
+   tilt:Number(this.props.tilt??0),letter:this.props.letter??'A',isGlow:v==='glow',isLocked:v==='locked',
+   ring:-Math.round(s*.16),ringR:Math.round(s*.34),ringW:Math.max(2,Math.round(s*.04)),
+   lockS:Math.round(s*.46),lockOff:-Math.round(s*.14),anim:v==='glow'?'ltGlow 1.4s ease-in-out infinite':'none'};
+ }
+}
+</script>
+</body>
+</html>

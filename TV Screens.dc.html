@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Huninn&family=Nunito:wght@600;700;800;900&family=Noto+Sans+TC:wght@500;700;900&display=swap">
+<style>body{margin:0;background:#0C0A24}a{color:#2EE6D6}a:hover{color:#FFD23F}
+@keyframes tvPop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+@keyframes tvCount{0%{transform:scale(2.4);opacity:0}35%{transform:scale(.92);opacity:1}55%{transform:scale(1.04)}80%{transform:scale(1);opacity:1}100%{transform:scale(.9);opacity:0}}
+@keyframes tvSpin{to{transform:rotate(360deg)}}
+@keyframes tvBar{0%{width:100%}100%{width:0%}}
+@keyframes tvThrow{0%{offset-distance:0%;transform:rotate(0deg) scale(1)}35%{offset-distance:100%;transform:rotate(720deg) scale(1)}42%{offset-distance:100%;transform:rotate(720deg) scale(1.18,.82)}50%,100%{offset-distance:100%;transform:rotate(720deg) scale(1)}}
+@keyframes tvFlash{0%,100%{opacity:0}8%{opacity:.85}30%{opacity:0}}
+@keyframes tvShake{0%,100%{transform:translate(0,0)}10%{transform:translate(-14px,6px)}20%{transform:translate(12px,-8px)}30%{transform:translate(-8px,-4px)}40%{transform:translate(6px,6px)}50%{transform:translate(0,0)}}
+@keyframes tvStamp{0%{transform:scale(3) rotate(-14deg);opacity:0}60%{transform:scale(.92) rotate(-14deg);opacity:1}100%{transform:scale(1) rotate(-14deg);opacity:1}}
+@keyframes tvConfetti{0%{transform:translateY(-80px) rotate(0deg)}100%{transform:translateY(1180px) rotate(720deg)}}
+@keyframes tvFloatUp{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-120px);opacity:0}}
+@keyframes tvGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes tvRise{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes tvBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes tvJitter{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes tvBlink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes tvDrift{0%{transform:translateX(0)}100%{transform:translateX(-160px)}}
+</style>
+</helmet>
+<div style="padding:120px;display:flex;flex-direction:column;gap:90px;font-family:'Nunito','Noto Sans TC',sans-serif;color:#FFFFFF">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;width:4040px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:96px;line-height:1">接字派對 · 主畫面</div>
+      <div style="font-size:36px;font-weight:700;color:#C9CCE8">TV / 筆電 1920×1080 · 遠距離觀看 · 最小字級 28px</div>
+    </div>
+    <div style="display:flex;gap:16px;font-size:30px;font-weight:800">
+      <a href="Design System.dc.html" style="padding:12px 24px;border:4px solid #2EE6D6;border-radius:999px;text-decoration:none">設計系統</a>
+      <a href="Scene Assets.dc.html" style="padding:12px 24px;border:4px solid #2EE6D6;border-radius:999px;text-decoration:none">場景素材</a>
+      <a href="Phone Screens.dc.html" style="padding:12px 24px;border:4px solid #2EE6D6;border-radius:999px;text-decoration:none">手機端</a>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(2,1920px);gap:120px 200px">
+
+    <!-- 01 HOME -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">01</span>首頁</div>
+      <div data-screen-label="01 首頁" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;top:56px;right:64px;display:flex;align-items:center;gap:12px;padding:12px 26px;background:#2C2870;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-size:30px;font-weight:800">
+          <dc-import name="Sprite" icon="team" size="40" hint-size="40px,40px"></dc-import>2–10 人 · 用手機加入
+        </div>
+        <div style="position:absolute;left:0;right:0;top:190px;display:flex;flex-direction:column;align-items:center;gap:20px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <dc-import name="LetterTile" letter="C" size="96" tilt="-8" hint-size="96px,96px"></dc-import>
+            <dc-import name="LetterTile" letter="A" size="96" tilt="4" hint-size="96px,96px"></dc-import>
+            <dc-import name="LetterTile" letter="T" variant="glow" size="96" tilt="-3" hint-size="96px,96px"></dc-import>
+            <dc-import name="Sprite" icon="link" variant="c" size="80" hint-size="80px,80px"></dc-import>
+            <dc-import name="LetterTile" letter="T" variant="used" size="96" tilt="6" hint-size="96px,96px"></dc-import>
+            <dc-import name="LetterTile" letter="O" size="96" tilt="-5" hint-size="96px,96px"></dc-import>
+            <dc-import name="LetterTile" letter="P" size="96" tilt="3" hint-size="96px,96px"></dc-import>
+          </div>
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:230px;line-height:1.05;color:#FFFFFF;-webkit-text-stroke:18px #14112F;paint-order:stroke fill;text-shadow:0 16px 0 #14112F;transform:rotate(-3deg);letter-spacing:8px">接字派對</div>
+          <div style="position:relative;margin-top:-10px;padding:12px 48px;background:#FF3D81;border:5px solid #14112F;border-radius:14px;box-shadow:0 8px 0 #14112F;transform:rotate(2deg);font-family:'Fredoka',sans-serif;font-weight:700;font-size:44px;letter-spacing:6px">
+            WORD CHAIN PARTY
+            <div style="position:absolute;top:-16px;left:-26px;width:90px;height:34px;background:rgba(255,255,255,.6);transform:rotate(-24deg)"></div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;top:700px;display:flex;flex-direction:column;align-items:center;gap:26px">
+          <div style="display:flex;align-items:center;gap:24px;padding:0 70px;height:150px;background:#FF3D81;border:6px solid #14112F;border-radius:40px;box-shadow:0 14px 0 #14112F;cursor:pointer;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:76px;color:#FFFFFF;-webkit-text-stroke:8px #14112F;paint-order:stroke fill" style-hover="transform:translateY(-4px);box-shadow:0 18px 0 #14112F" style-active="transform:translateY(10px);box-shadow:0 4px 0 #14112F">
+            <span style="display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:#FFD23F;border:5px solid #14112F;color:#14112F;-webkit-text-stroke:0;font-size:64px;line-height:1">+</span>建立房間
+          </div>
+          <div style="font-size:32px;font-weight:800;color:#C9CCE8;text-decoration:underline;text-underline-offset:8px">怎麼玩？</div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:-50px;display:flex;justify-content:center;gap:60px">
+          <sc-for list="{{ peek }}" as="p" hint-placeholder-count="7">
+            <div style="animation:tvBob 2.4s {{ p.d }}s ease-in-out infinite"><dc-import name="Avatar" kind="{{ p.k }}" mood="{{ p.m }}" size="150" hint-size="150px,150px"></dc-import></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 LOBBY -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">02</span>大廳</div>
+      <div data-screen-label="02 大廳" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;left:64px;top:140px;width:560px;height:500px;box-sizing:border-box;padding:36px;background:#FFFFFF;color:#14112F;border:6px solid #14112F;border-radius:36px;box-shadow:0 12px 0 #14112F;display:flex;flex-direction:column;gap:22px">
+          <div style="position:absolute;top:-20px;left:50%;margin-left:-70px;width:140px;height:40px;background:rgba(255,210,63,.8);transform:rotate(-4deg)"></div>
+          <div style="font-size:30px;font-weight:900;letter-spacing:2px">房間碼 ROOM CODE</div>
+          <div style="display:flex;gap:16px">
+            <dc-import name="LetterTile" letter="P" size="108" tilt="-3" hint-size="108px,108px"></dc-import>
+            <dc-import name="LetterTile" letter="Q" size="108" tilt="2" hint-size="108px,108px"></dc-import>
+            <dc-import name="LetterTile" letter="7" size="108" tilt="-2" hint-size="108px,108px"></dc-import>
+            <dc-import name="LetterTile" letter="K" size="108" tilt="3" hint-size="108px,108px"></dc-import>
+          </div>
+          <div style="display:flex;gap:24px;align-items:center;margin-top:8px">
+            <div style="width:196px;height:196px;padding:10px;box-sizing:border-box;border:5px solid #14112F;border-radius:20px;background:#FFFFFF;flex:none">{{ qr }}</div>
+            <div style="display:flex;flex-direction:column;gap:10px;font-size:28px;font-weight:800;line-height:1.3">
+              <div>手機掃描加入</div>
+              <div style="color:#5B54C9">或前往<br>jiezi.party</div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;left:664px;top:140px;right:64px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:56px">玩家</div>
+            <div style="display:flex;align-items:center;gap:12px;padding:6px 24px;background:#2EE6D6;color:#14112F;border:5px solid #14112F;border-radius:999px;font:700 40px 'Fredoka',sans-serif">6 / 10</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px">
+            <sc-for list="{{ slots }}" as="s" hint-placeholder-count="10">
+              <div style="position:relative;height:200px">
+                <sc-if value="{{ s.filled }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute;inset:0;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;animation:tvPop .32s cubic-bezier(.34,1.56,.64,1) both">
+                    <dc-import name="Avatar" kind="{{ s.k }}" size="120" hint-size="120px,120px"></dc-import>
+                    <div style="font-size:30px;font-weight:900">{{ s.n }}</div>
+                  </div>
+                  <sc-if value="{{ s.host }}" hint-placeholder-val="{{ false }}">
+                    <div style="position:absolute;top:-26px;left:-14px;transform:rotate(-18deg)"><dc-import name="Sprite" icon="crown" size="64" hint-size="64px,64px"></dc-import></div>
+                  </sc-if>
+                </sc-if>
+                <sc-if value="{{ s.empty }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;inset:0;border:5px dashed rgba(255,255,255,.35);border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#A5A2CC">
+                    <div style="width:76px;height:76px;border-radius:50%;border:5px dashed rgba(255,255,255,.35);display:grid;place-items:center;font:700 52px 'Fredoka',sans-serif">+</div>
+                    <div style="font-size:28px;font-weight:800">等待加入</div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;left:64px;right:64px;top:690px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">選擇模式</div>
+        <div style="position:absolute;left:64px;right:64px;bottom:50px;display:flex;align-items:flex-end;gap:32px">
+          <div style="display:flex;gap:16px">
+            <sc-for list="{{ modes }}" as="m" hint-placeholder-count="7">
+              <div style="position:relative;width:186px;height:246px;box-sizing:border-box;padding:22px 10px;background:{{ m.bg }};color:{{ m.fg }};border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;transform:{{ m.tf }};display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;cursor:pointer" style-hover="transform:translateY(-8px)">
+                <dc-import name="Sprite" icon="{{ m.icon }}" size="84" hint-size="84px,84px"></dc-import>
+                <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:34px;line-height:1.1">{{ m.t }}</div>
+                <div style="font-size:28px;font-weight:700;line-height:1.1;opacity:.85">{{ m.d }}</div>
+                <sc-if value="{{ m.sel }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;top:-22px;right:-18px"><dc-import name="Sprite" icon="check" size="56" hint-size="56px,56px"></dc-import></div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:stretch;gap:14px">
+            <div style="font-size:28px;font-weight:800;color:#C9CCE8;text-align:center">全員就緒 · 主持人開始</div>
+            <div style="height:170px;background:#FF3D81;border:6px solid #14112F;border-radius:36px;box-shadow:0 12px 0 #14112F;display:flex;align-items:center;justify-content:center;gap:18px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:64px;-webkit-text-stroke:7px #14112F;paint-order:stroke fill;cursor:pointer" style-hover="transform:translateY(-4px)" style-active="transform:translateY(10px);box-shadow:0 2px 0 #14112F">
+              <svg width="56" height="56" viewBox="0 0 100 100"><path d="M24 12 L88 50 L24 88Z" fill="#FFD23F" stroke="#14112F" stroke-width="10" stroke-linejoin="round"></path></svg>開始！
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 COUNTDOWN -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">03</span>倒數 3 · 2 · 1<span style="font-size:30px;color:#C9CCE8;font-family:'Nunito','Noto Sans TC',sans-serif">（每格 1 秒自動循環）</span></div>
+      <div data-screen-label="03 倒數" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.55)"></div>
+        <div style="position:absolute;left:50%;top:50%;width:1400px;height:1400px;margin:-700px 0 0 -700px;border-radius:50%;background:repeating-conic-gradient(rgba(255,210,63,.22) 0 10deg,transparent 10deg 20deg);animation:tvSpin 14s linear infinite"></div>
+        <div style="position:absolute;top:70px;left:0;right:0;display:flex;justify-content:center">
+          <div style="display:flex;align-items:center;gap:14px;padding:12px 32px;background:#FFD23F;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 8px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">
+            <dc-import name="Sprite" icon="zap" size="52" hint-size="52px,52px"></dc-import>閃電搶答 · 第 1 回合
+          </div>
+        </div>
+        <div style="position:absolute;left:50%;top:50%;width:600px;height:600px;margin:-300px 0 0 -300px;border-radius:50%;background:#FF3D81;border:12px solid #14112F;box-shadow:0 20px 0 #14112F"></div>
+        <div style="position:absolute;left:50%;top:50%;width:600px;height:600px;margin:-300px 0 0 -300px;display:grid;place-items:center;font-family:'Fredoka',sans-serif;font-weight:700;color:#FFFFFF;-webkit-text-stroke:20px #14112F;paint-order:stroke fill;text-shadow:0 18px 0 #14112F">
+          <sc-if value="{{ c3 }}" hint-placeholder-val="{{ true }}"><div style="font-size:440px;line-height:1;animation:tvCount 1s cubic-bezier(.34,1.56,.64,1) both">3</div></sc-if>
+          <sc-if value="{{ c2 }}" hint-placeholder-val="{{ false }}"><div style="font-size:440px;line-height:1;animation:tvCount 1s cubic-bezier(.34,1.56,.64,1) both">2</div></sc-if>
+          <sc-if value="{{ c1 }}" hint-placeholder-val="{{ false }}"><div style="font-size:440px;line-height:1;animation:tvCount 1s cubic-bezier(.34,1.56,.64,1) both">1</div></sc-if>
+          <sc-if value="{{ cgo }}" hint-placeholder-val="{{ false }}"><div style="font-size:250px;line-height:1;color:#FFD23F;animation:tvCount 1s cubic-bezier(.34,1.56,.64,1) both">GO!</div></sc-if>
+        </div>
+        <div style="position:absolute;bottom:80px;left:0;right:0;text-align:center;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:56px;-webkit-text-stroke:8px #14112F;paint-order:stroke fill">看向你的手機！</div>
+      </div>
+    </div>
+
+    <!-- 04A FLASH -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">04A</span>遊戲中 · 閃電搶答</div>
+      <div data-screen-label="04A 閃電搶答" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.35)"></div>
+        <div style="position:absolute;left:64px;right:64px;top:44px;display:flex;align-items:center;gap:28px">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 26px;background:#FFD23F;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px;flex:none">
+            <dc-import name="Sprite" icon="zap" size="44" hint-size="44px,44px"></dc-import>閃電搶答 2/5
+          </div>
+          <div style="flex:1;position:relative;height:64px;background:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #000;overflow:hidden">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:62%;background:#FFD23F;border-radius:999px;animation:tvBar 20s linear infinite;box-shadow:inset 0 8px 0 rgba(255,255,255,.4)"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font:700 48px 'Fredoka',sans-serif;flex:none"><dc-import name="Sprite" icon="clock" size="52" hint-size="52px,52px"></dc-import>12s</div>
+        </div>
+        <div style="position:absolute;left:64px;top:160px;width:1270px;display:flex;flex-direction:column;align-items:center;gap:28px">
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px">用這個字母開頭！</div>
+          <div style="margin:20px 0 10px"><dc-import name="LetterTile" letter="S" variant="glow" size="270" tilt="-4" hint-size="270px,270px"></dc-import></div>
+          <div style="align-self:stretch;display:flex;align-items:center;justify-content:space-between;margin-top:14px">
+            <div style="font-size:32px;font-weight:900">已搶到的單字</div>
+            <div style="font-size:28px;font-weight:800;color:#C9CCE8">共 10 個 · 越長分越高</div>
+          </div>
+          <div style="align-self:stretch;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px">
+            <sc-for list="{{ grabbed }}" as="w" hint-placeholder-count="9">
+              <div style="position:relative;display:flex;align-items:center;gap:14px;height:86px;padding:0 18px;background:{{ w.bg }};color:#14112F;border:5px solid #14112F;border-radius:22px;box-shadow:0 6px 0 #14112F;animation:tvPop .28s cubic-bezier(.34,1.56,.64,1) both">
+                <dc-import name="Avatar" kind="{{ w.k }}" size="58" hint-size="58px,58px"></dc-import>
+                <div style="flex:1;min-width:0;font:700 38px 'Fredoka',sans-serif;letter-spacing:1px;overflow:hidden;text-overflow:ellipsis">{{ w.w }}</div>
+                <div style="font:700 30px 'Fredoka',sans-serif;color:#5B54C9">+{{ w.p }}</div>
+                <sc-if value="{{ w.isNew }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;top:-18px;right:16px;padding:0 14px;background:#FF3D81;color:#FFFFFF;border:4px solid #14112F;border-radius:10px;font:700 28px 'Fredoka',sans-serif;transform:rotate(6deg)">NEW</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;right:64px;top:160px;width:470px;bottom:48px;box-sizing:border-box;padding:24px;background:#2C2870;border:6px solid #14112F;border-radius:36px;box-shadow:0 12px 0 #14112F;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:12px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px"><dc-import name="Sprite" icon="trophy" size="52" hint-size="52px,52px"></dc-import>排行榜</div>
+          <sc-for list="{{ board }}" as="r" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:12px;height:110px;padding:0 16px;background:{{ r.bg }};color:{{ r.fg }};border:5px solid #14112F;border-radius:24px;box-shadow:0 6px 0 #14112F">
+              <div style="width:58px;height:58px;display:grid;place-items:center;flex:none">
+                <sc-if value="{{ r.first }}" hint-placeholder-val="{{ false }}"><dc-import name="Sprite" icon="crown" size="58" hint-size="58px,58px"></dc-import></sc-if>
+                <sc-if value="{{ r.medal }}" hint-placeholder-val="{{ false }}"><div style="width:52px;height:52px;border-radius:50%;background:{{ r.medalBg }};color:#14112F;border:4px solid #14112F;display:grid;place-items:center;font:700 30px 'Fredoka',sans-serif">{{ r.rank }}</div></sc-if>
+                <sc-if value="{{ r.plain }}" hint-placeholder-val="{{ true }}"><div style="font:700 36px 'Fredoka',sans-serif">{{ r.rank }}</div></sc-if>
+              </div>
+              <dc-import name="Avatar" kind="{{ r.k }}" mood="{{ r.mood }}" size="70" hint-size="70px,70px"></dc-import>
+              <div style="flex:1;min-width:0;font-size:32px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.n }}</div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end">
+                <div style="font:700 36px 'Fredoka',sans-serif">{{ r.sc }}</div>
+                <div style="font:700 28px 'Fredoka',sans-serif;opacity:.8">{{ r.mv }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04B PRECISE -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">04B</span>遊戲中 · 精準接龍</div>
+      <div data-screen-label="04B 精準接龍" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.45)"></div>
+        <div style="position:absolute;left:64px;right:64px;top:44px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 26px;background:#FFD23F;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px">
+            <dc-import name="Sprite" icon="target" size="44" hint-size="44px,44px"></dc-import>精準接龍 · 先完成 6 個字
+          </div>
+          <div style="display:flex;align-items:center;gap:28px;font-size:30px;font-weight:800">
+            <div style="display:flex;align-items:center;gap:8px"><dc-import name="Sprite" icon="flame" variant="3" size="40" hint-size="40px,40px"></dc-import>連擊</div>
+            <div style="display:flex;align-items:center;gap:8px"><dc-import name="Sprite" icon="cross" size="36" hint-size="36px,36px"></dc-import>錯誤（3 次歸零）</div>
+            <div style="display:flex;align-items:center;gap:10px;font:700 44px 'Fredoka',sans-serif"><dc-import name="Sprite" icon="clock" size="48" hint-size="48px,48px"></dc-import>0:42</div>
+          </div>
+        </div>
+        <div style="position:absolute;left:64px;right:64px;top:150px;display:flex;flex-direction:column;gap:16px">
+          <sc-for list="{{ lanes }}" as="l" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:28px;height:132px;padding:0 24px;background:{{ l.bg }};border:5px solid #14112F;border-radius:30px;box-shadow:0 8px 0 #14112F">
+              <div style="display:flex;align-items:center;gap:14px;width:250px;flex:none">
+                <dc-import name="Avatar" kind="{{ l.k }}" mood="{{ l.mood }}" size="92" hint-size="92px,92px"></dc-import>
+                <div style="font-size:32px;font-weight:900">{{ l.n }}</div>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+                <div style="font-size:28px;font-weight:800;color:#C9CCE8">最新 <span style="font-family:'Fredoka',sans-serif;color:#FFFFFF;letter-spacing:1px">{{ l.last }}</span></div>
+                <div style="position:relative;height:52px;background:#14112F;border-radius:999px;border:4px solid #14112F">
+                  <div style="position:absolute;left:0;top:0;bottom:0;width:{{ l.pct }}%;background:#2EE6D6;border-radius:999px;box-shadow:inset 0 6px 0 rgba(255,255,255,.4)"></div>
+                  <sc-for list="{{ l.nodes }}" as="nd" hint-placeholder-count="6">
+                    <div style="position:absolute;top:50%;left:{{ nd.left }}%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:{{ nd.bg }};border:4px solid #14112F"></div>
+                  </sc-for>
+                  <div style="position:absolute;right:-10px;top:-26px"><dc-import name="Sprite" icon="flag" size="64" hint-size="64px,64px"></dc-import></div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;width:150px;flex:none">
+                <div style="animation:tvJitter .4s ease-in-out infinite"><dc-import name="Sprite" icon="flame" variant="{{ l.fl }}" size="64" hint-size="64px,64px"></dc-import></div>
+                <div style="font:700 48px 'Fredoka',sans-serif">×{{ l.combo }}</div>
+              </div>
+              <div style="display:flex;gap:8px;width:170px;flex:none">
+                <sc-for list="{{ l.errs }}" as="e" hint-placeholder-count="3">
+                  <dc-import name="Sprite" icon="{{ e }}" size="48" hint-size="48px,48px"></dc-import>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04C BOMB -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FF3D81;color:#FFFFFF;border:4px solid #14112F;border-radius:16px;padding:0 18px">04C</span>遊戲中 · 炸彈傳遞（丟炸彈拋物線）</div>
+      <div data-screen-label="04C 炸彈傳遞" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="tense" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;left:48px;top:40px;display:flex;align-items:center;gap:12px;padding:10px 26px;background:#FF3D81;color:#FFFFFF;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px">
+          <dc-import name="Sprite" icon="bomb" size="44" hint-size="44px,44px"></dc-import>炸彈傳遞 · 剩 9 人
+        </div>
+        <div style="position:absolute;left:640px;top:370px;width:640px;height:340px;box-sizing:border-box;padding:30px;background:#FFFFFF;color:#14112F;border:6px solid #14112F;border-radius:40px;box-shadow:0 12px 0 #14112F;display:flex;flex-direction:column;align-items:center;gap:20px">
+          <div style="font-size:30px;font-weight:900;color:#5B54C9">上一個字</div>
+          <div style="display:flex;gap:10px">
+            <dc-import name="LetterTile" letter="T" size="88" hint-size="88px,88px"></dc-import>
+            <dc-import name="LetterTile" letter="I" size="88" hint-size="88px,88px"></dc-import>
+            <dc-import name="LetterTile" letter="G" size="88" hint-size="88px,88px"></dc-import>
+            <dc-import name="LetterTile" letter="E" size="88" hint-size="88px,88px"></dc-import>
+            <dc-import name="LetterTile" letter="R" variant="glow" size="88" hint-size="88px,88px"></dc-import>
+          </div>
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px">Kiki：接 <span style="padding:0 12px;background:#FFD23F;border:4px solid #14112F;border-radius:12px">R</span> 開頭！</div>
+        </div>
+        <svg width="1920" height="1080" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0;pointer-events:none"><path d="{{ arcD }}" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-dasharray="4 18" stroke-linecap="round" opacity=".7"></path></svg>
+        <sc-for list="{{ ringA }}" as="p" hint-placeholder-count="10">
+          <div style="position:absolute;left:{{ p.x }}px;top:{{ p.y }}px;width:200px;display:flex;flex-direction:column;align-items:center;gap:6px">
+            <sc-if value="{{ p.holder }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:-22px;left:10px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,63,.55),rgba(255,210,63,0) 70%)"></div>
+              <div style="position:absolute;top:-14px;left:18px;width:156px;height:156px;box-sizing:border-box;border-radius:50%;border:6px dashed #FFD23F;animation:tvSpin 4s linear infinite"></div>
+            </sc-if>
+            <div style="position:relative;animation:{{ p.anim }}"><dc-import name="Avatar" kind="{{ p.k }}" mood="{{ p.mood }}" size="128" hint-size="128px,128px"></dc-import></div>
+            <div style="position:relative;padding:2px 18px;background:{{ p.plate }};color:{{ p.plateFg }};border:4px solid #14112F;border-radius:999px;font-size:28px;font-weight:900">{{ p.n }}</div>
+            <div style="position:relative;display:flex;gap:4px">
+              <sc-for list="{{ p.hearts }}" as="h" hint-placeholder-count="3"><dc-import name="Sprite" icon="heart" variant="{{ h }}" size="34" hint-size="34px,34px"></dc-import></sc-for>
+            </div>
+            <sc-if value="{{ p.holder }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:-58px;padding:4px 16px;background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:12px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:30px;transform:rotate(-6deg);animation:tvBlink .6s steps(2) infinite">接招！</div>
+            </sc-if>
+            <sc-if value="{{ p.out }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:36px;padding:2px 14px;border:6px solid #FF3D81;border-radius:12px;color:#FF3D81;background:rgba(20,17,47,.6);font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:40px;transform:rotate(-14deg)">出局</div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="position:absolute;left:0;top:0;width:150px;height:150px;offset-path:{{ arcPath }};offset-rotate:0deg;animation:tvThrow 2.8s cubic-bezier(.45,0,.55,1) infinite">
+          <dc-import name="Bomb" stage="fuse3" size="150" hint-size="150px,150px"></dc-import>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04C-2 BOOM -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FF3D81;color:#FFFFFF;border:4px solid #14112F;border-radius:16px;padding:0 18px">04C-2</span>炸彈傳遞 · 爆炸瞬間</div>
+      <div data-screen-label="04C-2 爆炸" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <div style="position:absolute;inset:-30px;animation:tvShake 2.4s ease-out infinite">
+          <div style="position:absolute;inset:30px">
+            <dc-import name="StageBG" mood="tense" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+            <sc-for list="{{ ringB }}" as="p" hint-placeholder-count="10">
+              <div style="position:absolute;left:{{ p.x }}px;top:{{ p.y }}px;width:200px;display:flex;flex-direction:column;align-items:center;gap:6px">
+                <dc-import name="Avatar" kind="{{ p.k }}" mood="{{ p.mood }}" size="128" hint-size="128px,128px"></dc-import>
+                <div style="padding:2px 18px;background:{{ p.plate }};color:{{ p.plateFg }};border:4px solid #14112F;border-radius:999px;font-size:28px;font-weight:900">{{ p.n }}</div>
+                <div style="display:flex;gap:4px">
+                  <sc-for list="{{ p.hearts }}" as="h" hint-placeholder-count="3"><dc-import name="Sprite" icon="heart" variant="{{ h }}" size="34" hint-size="34px,34px"></dc-import></sc-for>
+                </div>
+              </div>
+            </sc-for>
+            <div style="position:absolute;left:{{ boomX }}px;top:{{ boomY }}px;width:360px;height:360px">
+              <dc-import name="Bomb" stage="boom" size="360" hint-size="360px,360px"></dc-import>
+            </div>
+            <div style="position:absolute;left:{{ minusX }}px;top:{{ minusY }}px;display:flex;align-items:center;gap:8px;font:700 56px 'Fredoka',sans-serif;color:#FFFFFF;-webkit-text-stroke:8px #14112F;paint-order:stroke fill;animation:tvFloatUp 1.6s ease-out infinite">-1<dc-import name="Sprite" icon="heart" variant="lost" size="56" hint-size="56px,56px"></dc-import></div>
+            <div style="position:absolute;left:560px;top:380px;width:800px;display:flex;flex-direction:column;align-items:center;gap:16px">
+              <div style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:200px;line-height:1;color:#FFD23F;-webkit-text-stroke:18px #14112F;paint-order:stroke fill;text-shadow:0 14px 0 #14112F;transform:rotate(-6deg);animation:tvPop .45s cubic-bezier(.2,1.4,.4,1) both">BOOM!</div>
+              <div style="padding:14px 34px;background:#FFFFFF;color:#14112F;border:5px solid #14112F;border-radius:24px;box-shadow:0 8px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:40px">Kiki 剩 1 條命 · 下一位 大雄</div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;background:#FFFFFF;pointer-events:none;animation:tvFlash 2.4s ease-out infinite"></div>
+      </div>
+    </div>
+
+    <!-- 04D ELIMINATION -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">04D</span>遊戲中 · 末位淘汰</div>
+      <div data-screen-label="04D 末位淘汰" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.45)"></div>
+        <div style="position:absolute;left:64px;right:64px;top:44px;display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 26px;background:#FFD23F;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px">
+            <dc-import name="Sprite" icon="out" size="44" hint-size="44px,44px"></dc-import>末位淘汰 · 第 3 輪
+          </div>
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:40px">本輪最低分出局 · 剩 8 人</div>
+          <div style="width:110px;height:110px;border-radius:50%;background:conic-gradient(#FF8A3D 0 40%,#14112F 40% 100%);border:6px solid #14112F;display:grid;place-items:center;box-shadow:0 6px 0 #14112F">
+            <div style="width:78px;height:78px;border-radius:50%;background:#FFFFFF;color:#14112F;display:grid;place-items:center;font:700 44px 'Fredoka',sans-serif">08</div>
+          </div>
+        </div>
+        <div style="position:absolute;left:64px;right:64px;top:200px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:36px">
+          <sc-for list="{{ elim }}" as="c" hint-placeholder-count="10">
+            <div style="position:relative;height:388px">
+              <div style="position:absolute;inset:0;box-sizing:border-box;padding:26px 16px;background:{{ c.bg }};border:{{ c.border }};border-radius:32px;box-shadow:0 10px 0 #14112F;display:flex;flex-direction:column;align-items:center;gap:10px;filter:{{ c.filter }};animation:{{ c.anim }};overflow:hidden">
+                <sc-if value="{{ c.danger }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;right:0;top:0;height:22px;background:repeating-linear-gradient(-45deg,#FFD23F 0 16px,#14112F 16px 32px)"></div></sc-if>
+                <div style="font:700 30px 'Fredoka',sans-serif;color:#C9CCE8;margin-top:6px">#{{ c.rank }}</div>
+                <dc-import name="Avatar" kind="{{ c.k }}" mood="{{ c.mood }}" size="170" hint-size="170px,170px"></dc-import>
+                <div style="font-size:34px;font-weight:900">{{ c.n }}</div>
+                <div style="font:700 44px 'Fredoka',sans-serif">{{ c.sc }}</div>
+              </div>
+              <sc-if value="{{ c.danger }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;bottom:-20px;left:50%;margin-left:-90px;width:180px;display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 0;background:#FF8A3D;color:#14112F;border:4px solid #14112F;border-radius:14px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:30px"><dc-import name="Sprite" icon="trap" size="34" hint-size="34px,34px"></dc-import>危險區</div>
+              </sc-if>
+              <sc-if value="{{ c.out }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;left:50%;top:50%;width:260px;margin:-80px 0 0 -130px;box-sizing:border-box;padding:10px 0;border:9px solid #FF3D81;border-radius:20px;outline:4px solid #FF3D81;outline-offset:6px;color:#FF3D81;background:rgba(255,255,255,.92);text-align:center;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:64px;line-height:1.05;animation:tvStamp .35s cubic-bezier(.2,1.4,.4,1) both">淘汰<div style="font-size:36px;letter-spacing:8px">OUT</div></div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04E TEAM RELAY -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">04E</span>遊戲中 · 組隊接力</div>
+      <div data-screen-label="04E 組隊接力" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.4)"></div>
+        <sc-for list="{{ teams }}" as="t" hint-placeholder-count="2">
+          <div style="position:absolute;top:60px;bottom:60px;left:{{ t.left }}px;width:420px;box-sizing:border-box;padding:28px;background:{{ t.tint }};border:6px solid #14112F;border-radius:40px;box-shadow:0 12px 0 #14112F;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:52px;height:52px;background:{{ t.c }};border:5px solid #14112F;border-radius:{{ t.shapeR }};clip-path:{{ t.clip }}"></div>
+              <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px">{{ t.name }}</div>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:10px"><div style="font:700 120px 'Fredoka',sans-serif;line-height:1;color:{{ t.c }};-webkit-text-stroke:8px #14112F;paint-order:stroke fill">{{ t.score }}</div><div style="font-size:30px;font-weight:800">/ 20 字</div></div>
+            <sc-for list="{{ t.members }}" as="m" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:14px;height:96px;padding:0 14px;border-radius:24px;background:{{ m.bg }};border:{{ m.border }}">
+                <dc-import name="Avatar" kind="{{ m.k }}" mood="{{ m.mood }}" size="76" hint-size="76px,76px"></dc-import>
+                <div style="flex:1;font-size:32px;font-weight:900">{{ m.n }}</div>
+                <sc-if value="{{ m.turn }}" hint-placeholder-val="{{ false }}"><div style="padding:2px 12px;background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:10px;font-size:28px;font-weight:900">接力中</div></sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+        <div style="position:absolute;left:520px;right:520px;top:60px;display:flex;flex-direction:column;align-items:center;gap:6px">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 26px;background:#FFD23F;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><dc-import name="Sprite" icon="team" size="44" hint-size="44px,44px"></dc-import>組隊接力 · 先到 20 字</div>
+        </div>
+        <div style="position:absolute;left:520px;right:520px;top:150px;height:690px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 22%);mask-image:linear-gradient(to bottom,transparent 0,#000 22%)">
+          <sc-for list="{{ relay }}" as="w" hint-placeholder-count="7">
+            <div style="display:flex;flex-direction:column;align-items:center;transform:translateX({{ w.dx }}px)">
+              <sc-if value="{{ w.link }}" hint-placeholder-val="{{ true }}"><div style="transform:rotate(90deg);margin:-14px 0"><dc-import name="Sprite" icon="link" variant="{{ w.lv }}" size="64" hint-size="64px,64px"></dc-import></div></sc-if>
+              <div style="display:flex;align-items:center;gap:14px;height:84px;padding:0 22px 0 14px;background:#FFFFFF;color:#14112F;border:5px solid #14112F;border-radius:24px;box-shadow:0 6px 0 #14112F;animation:{{ w.anim }}">
+                <div style="width:34px;height:34px;background:{{ w.c }};border:4px solid #14112F;border-radius:{{ w.shapeR }};clip-path:{{ w.clip }}"></div>
+                <dc-import name="Avatar" kind="{{ w.k }}" size="56" hint-size="56px,56px"></dc-import>
+                <div style="font:700 44px 'Fredoka',sans-serif;letter-spacing:2px">{{ w.stem }}<span style="padding:0 6px;margin-left:2px;background:#FFD23F;border:3px solid #14112F;border-radius:8px">{{ w.end }}</span></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:absolute;left:560px;right:560px;bottom:60px;height:150px;box-sizing:border-box;padding:0 28px;border:6px dashed #FFD23F;border-radius:32px;background:rgba(20,17,47,.6);display:flex;align-items:center;gap:20px">
+          <dc-import name="Avatar" kind="0" size="96" hint-size="96px,96px"></dc-import>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:30px;font-weight:900">輪到 洋紅隊 · 小美</div>
+            <div style="font:700 52px 'Fredoka',sans-serif;letter-spacing:10px">E _ _ _ _<span style="animation:tvBlink 1s steps(2) infinite">|</span></div>
+          </div>
+          <div style="font:700 56px 'Fredoka',sans-serif;color:#FFD23F">7s</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04F COOP -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">04F</span>遊戲中 · 合作長龍</div>
+      <div data-screen-label="04F 合作長龍" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.35)"></div>
+        <div style="position:absolute;left:64px;right:64px;top:44px;display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 26px;background:#FFD23F;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><dc-import name="Sprite" icon="coop" size="44" hint-size="44px,44px"></dc-import>合作長龍 · 全員一隊</div>
+          <div style="display:flex;align-items:center;gap:10px;font:700 48px 'Fredoka',sans-serif"><dc-import name="Sprite" icon="clock" size="52" hint-size="52px,52px"></dc-import>1:24</div>
+        </div>
+        <div style="position:absolute;left:0;right:0;top:140px;display:flex;flex-direction:column;align-items:center;gap:18px">
+          <div style="display:flex;align-items:baseline;gap:20px">
+            <div style="font-size:36px;font-weight:900">目前長度</div>
+            <div style="font:700 150px 'Fredoka',sans-serif;line-height:1;color:#2EE6D6;-webkit-text-stroke:12px #14112F;paint-order:stroke fill;text-shadow:0 10px 0 #14112F">23</div>
+            <div style="font:700 70px 'Fredoka',sans-serif;color:#C9CCE8">/ 30</div>
+            <div style="font-size:36px;font-weight:900">目標</div>
+          </div>
+          <div style="position:relative;width:1400px;height:56px;background:#14112F;border:5px solid #14112F;border-radius:999px">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:76.6%;background:#2EE6D6;border-radius:999px;box-shadow:inset 0 8px 0 rgba(255,255,255,.4)"></div>
+            <div style="position:absolute;left:33.3%;top:50%;margin:-34px 0 0 -34px"><dc-import name="Sprite" icon="star" size="68" hint-size="68px,68px"></dc-import></div>
+            <div style="position:absolute;left:66.6%;top:50%;margin:-34px 0 0 -34px"><dc-import name="Sprite" icon="star" size="68" hint-size="68px,68px"></dc-import></div>
+            <div style="position:absolute;left:100%;top:50%;margin:-44px 0 0 -44px"><dc-import name="Sprite" icon="trophy" size="88" hint-size="88px,88px"></dc-import></div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;top:470px;height:260px;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 18%);mask-image:linear-gradient(to right,transparent 0,#000 18%)">
+          <div style="position:absolute;right:80px;top:0;bottom:0;display:flex;align-items:center;animation:tvDrift 8s ease-in-out infinite alternate">
+            <sc-for list="{{ coop }}" as="w" hint-placeholder-count="8">
+              <div style="display:flex;align-items:center;transform:translateY({{ w.dy }}px)">
+                <sc-if value="{{ w.link }}" hint-placeholder-val="{{ true }}"><div style="margin:0 -12px"><dc-import name="Sprite" icon="link" variant="c" size="64" hint-size="64px,64px"></dc-import></div></sc-if>
+                <div style="height:104px;padding:0 28px;display:flex;align-items:center;background:{{ w.bg }};color:#14112F;border:6px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;font:700 54px 'Fredoka',sans-serif;letter-spacing:2px;white-space:nowrap">{{ w.stem }}<span style="padding:0 8px;margin-left:2px;background:#FFD23F;border:4px solid #14112F;border-radius:10px">{{ w.end }}</span></div>
+              </div>
+            </sc-for>
+            <div style="display:flex;align-items:center;transform:translateY(-30px)">
+              <div style="margin:0 -12px"><dc-import name="Sprite" icon="link" variant="w" size="64" hint-size="64px,64px"></dc-import></div>
+              <div style="height:104px;padding:0 28px;display:flex;align-items:center;border:6px dashed #FFD23F;border-radius:28px;background:rgba(20,17,47,.6);font:700 54px 'Fredoka',sans-serif;color:#FFD23F;animation:tvBlink 1.2s ease-in-out infinite">T ?</div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:60px;display:flex;justify-content:center;gap:40px">
+          <sc-for list="{{ coopP }}" as="p" hint-placeholder-count="8">
+            <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;animation:tvBob 2s {{ p.d }}s ease-in-out infinite">
+              <dc-import name="Avatar" kind="{{ p.k }}" mood="{{ p.m }}" size="120" hint-size="120px,120px"></dc-import>
+              <div style="font-size:28px;font-weight:900">{{ p.n }}</div>
+              <div style="position:absolute;top:-8px;right:-14px;padding:0 10px;background:#2EE6D6;color:#14112F;border:4px solid #14112F;border-radius:999px;font:700 28px 'Fredoka',sans-serif">×{{ p.c }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04G TRAP -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">04G</span>遊戲中 · 陷阱接龍</div>
+      <div data-screen-label="04G 陷阱接龍" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.45)"></div>
+        <div style="position:absolute;left:64px;top:44px;display:flex;align-items:center;gap:12px;padding:10px 26px;background:#FF8A3D;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:36px"><dc-import name="Sprite" icon="trap" size="44" hint-size="44px,44px"></dc-import>陷阱接龍 · 第 4 輪</div>
+        <div style="position:absolute;left:64px;top:170px;width:330px;box-sizing:border-box;padding:28px;background:#2C2870;border:6px solid #14112F;border-radius:36px;box-shadow:0 12px 0 #14112F;display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="font-size:30px;font-weight:900;color:#C9CCE8">輪到</div>
+          <dc-import name="Avatar" kind="8" size="170" hint-size="170px,170px"></dc-import>
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px">Momo</div>
+          <div style="width:150px;height:150px;border-radius:50%;background:conic-gradient(#FF3D81 0 30%,#14112F 30% 100%);border:6px solid #14112F;display:grid;place-items:center;box-shadow:0 6px 0 #14112F">
+            <div style="width:108px;height:108px;border-radius:50%;background:#FFFFFF;color:#FF3D81;display:grid;place-items:center;font:700 60px 'Fredoka',sans-serif">3</div>
+          </div>
+          <div style="font-size:28px;font-weight:800">秒 · 被縮時！</div>
+        </div>
+        <div style="position:absolute;left:440px;right:470px;top:200px;display:flex;flex-direction:column;align-items:center;gap:30px">
+          <div style="font-size:36px;font-weight:900">目前單字</div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <dc-import name="LetterTile" letter="G" size="150" tilt="-3" hint-size="150px,150px"></dc-import>
+            <dc-import name="LetterTile" letter="A" size="150" tilt="2" hint-size="150px,150px"></dc-import>
+            <dc-import name="LetterTile" letter="L" size="150" tilt="-2" hint-size="150px,150px"></dc-import>
+            <dc-import name="LetterTile" letter="A" size="150" tilt="3" hint-size="150px,150px"></dc-import>
+            <dc-import name="LetterTile" letter="X" size="150" tilt="-1" hint-size="150px,150px"></dc-import>
+            <div style="position:relative;margin-left:18px;padding:22px;border:8px solid #FFD23F;border-radius:44px;box-shadow:0 0 0 6px #14112F,0 0 60px rgba(255,210,63,.9),inset 0 0 30px rgba(255,210,63,.5)">
+              <dc-import name="LetterTile" letter="Y" variant="glow" size="170" tilt="4" hint-size="170px,170px"></dc-import>
+              <div style="position:absolute;top:-30px;right:-28px"><dc-import name="Sprite" icon="spark" size="60" hint-size="60px,60px"></dc-import></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;padding:16px 36px;background:#FFFFFF;color:#14112F;border:6px solid #14112F;border-radius:28px;box-shadow:0 10px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px">
+            下一個字以
+            <span style="display:grid;place-items:center;width:72px;height:72px;background:#FFD23F;border:5px solid #14112F;border-radius:18px;font-family:'Fredoka',sans-serif">Y</span>
+            開頭
+            <svg width="52" height="52" viewBox="0 0 100 100"><path d="M50 10 V82 M22 56 L50 86 L78 56" fill="none" stroke="#14112F" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:10px">
+            <sc-for list="{{ trapHist }}" as="h" hint-placeholder-count="4">
+              <div style="padding:6px 18px;background:#2C2870;border:4px solid #14112F;border-radius:999px;font:700 30px 'Fredoka',sans-serif;color:#C9CCE8">{{ h }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;right:64px;top:170px;width:380px;box-sizing:border-box;padding:30px;background:#FFFFFF;color:#14112F;border:6px solid #14112F;border-radius:36px;box-shadow:0 12px 0 #14112F;transform:rotate(1.5deg);display:flex;flex-direction:column;gap:20px">
+          <div style="position:absolute;top:-20px;left:40px;width:130px;height:40px;background:rgba(255,138,61,.8);transform:rotate(-6deg)"></div>
+          <div style="display:flex;align-items:center;gap:12px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:44px"><dc-import name="Sprite" icon="trap" size="52" hint-size="52px,52px"></dc-import>本輪陷阱</div>
+          <div style="font-size:30px;font-weight:900">封鎖字母（不能出現）</div>
+          <div style="display:flex;gap:22px">
+            <dc-import name="LetterTile" letter="E" variant="locked" size="96" hint-size="96px,96px"></dc-import>
+            <dc-import name="LetterTile" letter="S" variant="locked" size="96" hint-size="96px,96px"></dc-import>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:30px;font-weight:900"><dc-import name="Sprite" icon="cross" size="40" hint-size="40px,40px"></dc-import>少於 4 個字母</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:30px;font-weight:900"><dc-import name="Sprite" icon="cross" size="40" hint-size="40px,40px"></dc-import>重複出現的字</div>
+        </div>
+        <div style="position:absolute;left:50%;bottom:70px;margin-left:-560px;width:1120px;height:120px;box-sizing:border-box;padding:0 30px;display:flex;align-items:center;gap:18px;background:#FF3D81;border:6px solid #14112F;border-radius:30px;box-shadow:0 10px 0 #14112F;transform:rotate(-1.5deg);animation:tvPop .4s cubic-bezier(.34,1.56,.64,1) both">
+          <dc-import name="Sprite" icon="hourglass" size="80" hint-size="80px,80px"></dc-import>
+          <dc-import name="Avatar" kind="3" mood="out" size="72" hint-size="72px,72px"></dc-import>
+          <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:40px;-webkit-text-stroke:6px #14112F;paint-order:stroke fill">小安（觀眾）對 Momo 丟出縮時沙漏！-3 秒</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 ROUND RESULTS -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">05</span>回合結算 + MVP</div>
+      <div data-screen-label="05 回合結算" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;inset:0;background:rgba(20,17,47,.5)"></div>
+        <div style="position:absolute;left:64px;top:50px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:72px;-webkit-text-stroke:8px #14112F;paint-order:stroke fill">第 2 回合 · 本回合得分</div>
+        <div style="position:absolute;left:64px;top:170px;width:1080px;display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ bars }}" as="b" hint-placeholder-count="8">
+            <div style="display:flex;align-items:center;gap:16px;height:94px">
+              <div style="width:48px;font:700 40px 'Fredoka',sans-serif;text-align:center">{{ b.rank }}</div>
+              <dc-import name="Avatar" kind="{{ b.k }}" mood="{{ b.mood }}" size="80" hint-size="80px,80px"></dc-import>
+              <div style="width:130px;font-size:32px;font-weight:900;white-space:nowrap">{{ b.n }}</div>
+              <div style="flex:1;position:relative;height:66px;background:rgba(20,17,47,.6);border-radius:20px">
+                <div style="position:absolute;left:0;top:0;bottom:0;width:{{ b.pct }}%;background:{{ b.c }};border:5px solid #14112F;border-radius:20px;box-shadow:0 6px 0 #14112F,inset 0 10px 0 rgba(255,255,255,.35);transform-origin:left;animation:tvGrow .8s {{ b.delay }}s cubic-bezier(.22,1,.36,1) both;display:flex;align-items:center;justify-content:flex-end;padding-right:16px;box-sizing:border-box;font:700 36px 'Fredoka',sans-serif;color:#14112F">+{{ b.sc }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:absolute;right:60px;top:110px;width:640px;height:900px">
+          <div style="position:absolute;left:50%;top:46%;width:1100px;height:1100px;margin:-550px 0 0 -550px;border-radius:50%;background:repeating-conic-gradient(rgba(255,210,63,.3) 0 9deg,transparent 9deg 18deg);animation:tvSpin 12s linear infinite;-webkit-mask-image:radial-gradient(circle,#000 30%,transparent 65%);mask-image:radial-gradient(circle,#000 30%,transparent 65%)"></div>
+          <div style="position:absolute;left:40px;right:40px;top:80px;box-sizing:border-box;padding:40px 30px 36px;background:#FFD23F;color:#14112F;border:7px solid #14112F;border-radius:44px;box-shadow:0 16px 0 #14112F;transform:rotate(2.5deg);display:flex;flex-direction:column;align-items:center;gap:12px;animation:tvPop .5s cubic-bezier(.34,1.56,.64,1) both">
+            <div style="position:absolute;top:-44px;left:50%;margin-left:-150px;width:300px;height:88px;background:#FF3D81;border:6px solid #14112F;border-radius:18px;display:grid;place-items:center;font:700 64px 'Fredoka',sans-serif;color:#FFFFFF;-webkit-text-stroke:7px #14112F;paint-order:stroke fill;transform:rotate(-4deg)">MVP</div>
+            <div style="position:relative;margin-top:30px">
+              <div style="position:absolute;top:-64px;left:50%;margin-left:-60px;transform:rotate(-8deg)"><dc-import name="Sprite" icon="crown" size="120" hint-size="120px,120px"></dc-import></div>
+              <dc-import name="Avatar" kind="11" mood="score" size="260" hint-size="260px,260px"></dc-import>
+            </div>
+            <div style="font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:80px;line-height:1">阿傑</div>
+            <div style="font:700 56px 'Fredoka',sans-serif">+960 分</div>
+            <div style="align-self:stretch;margin-top:8px;padding:14px;background:#FFFFFF;border:5px solid #14112F;border-radius:24px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="font-size:28px;font-weight:900;color:#5B54C9">本回合最長單字</div>
+              <div style="font:700 50px 'Fredoka',sans-serif;letter-spacing:2px">SPECTACULAR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 FINAL -->
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:20px;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:48px"><span style="background:#FFD23F;color:#14112F;border:4px solid #14112F;border-radius:16px;padding:0 18px">06</span>最終頒獎</div>
+      <div data-screen-label="06 最終頒獎" style="position:relative;width:1920px;height:1080px;overflow:hidden;border-radius:32px;border:6px solid #14112F;box-shadow:0 20px 0 #000">
+        <dc-import name="StageBG" mood="lobby" style="position:absolute;inset:0" hint-size="100%,100%"></dc-import>
+        <div style="position:absolute;left:0;right:0;top:50px;display:flex;justify-content:center">
+          <div style="position:relative;display:flex;align-items:center;gap:20px;padding:14px 60px;background:#FF3D81;border:6px solid #14112F;border-radius:20px;box-shadow:0 10px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:72px;-webkit-text-stroke:8px #14112F;paint-order:stroke fill">
+            <dc-import name="Sprite" icon="trophy" size="80" hint-size="80px,80px"></dc-import>派對冠軍出爐！<dc-import name="Sprite" icon="trophy" size="80" hint-size="80px,80px"></dc-import>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;align-items:flex-end;gap:0">
+          <sc-for list="{{ podium }}" as="p" hint-placeholder-count="3">
+            <div style="width:400px;display:flex;flex-direction:column;align-items:center;gap:10px">
+              <div style="position:relative;animation:tvBob 2s {{ p.bob }}s ease-in-out infinite">
+                <sc-if value="{{ p.first }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:-80px;left:50%;margin-left:-70px;transform:rotate(-8deg)"><dc-import name="Sprite" icon="crown" size="140" hint-size="140px,140px"></dc-import></div></sc-if>
+                <dc-import name="Avatar" kind="{{ p.k }}" mood="score" size="{{ p.av }}" hint-size="200px,200px"></dc-import>
+              </div>
+              <div style="padding:6px 28px;background:#FFFFFF;color:#14112F;border:5px solid #14112F;border-radius:999px;box-shadow:0 6px 0 #14112F;display:flex;align-items:center;gap:14px"><span style="font-size:36px;font-weight:900">{{ p.n }}</span><span style="font:700 36px 'Fredoka',sans-serif;color:#5B54C9">{{ p.sc }}</span></div>
+              <div style="width:100%;height:{{ p.h }}px;overflow:hidden">
+                <div style="height:100%;box-sizing:border-box;background:{{ p.c }};border:6px solid #14112F;border-bottom:0;border-radius:28px 28px 0 0;box-shadow:inset 0 16px 0 rgba(255,255,255,.35);display:flex;flex-direction:column;align-items:center;padding-top:22px;gap:6px;animation:tvRise .6s {{ p.delay }}s cubic-bezier(.22,1,.36,1) both">
+                  <dc-import name="Sprite" icon="trophy" variant="{{ p.tv }}" size="90" hint-size="90px,90px"></dc-import>
+                  <div style="font:700 110px 'Fredoka',sans-serif;line-height:1;color:#FFFFFF;-webkit-text-stroke:10px #14112F;paint-order:stroke fill">{{ p.rank }}</div>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:absolute;right:56px;bottom:56px;display:flex;flex-direction:column;gap:16px">
+          <div style="padding:16px 36px;background:#FF3D81;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:40px;text-align:center">再玩一局</div>
+          <div style="padding:12px 36px;background:#2C2870;border:5px solid #14112F;border-radius:28px;box-shadow:0 8px 0 #14112F;font-family:'Fredoka','Huninn',sans-serif;font-weight:700;font-size:34px;text-align:center">回大廳</div>
+        </div>
+        <sc-for list="{{ confetti }}" as="f" hint-placeholder-count="0">
+          <div style="position:absolute;top:0;left:{{ f.left }}%;width:{{ f.w }}px;height:{{ f.h }}px;background:{{ f.c }};border:3px solid #14112F;border-radius:{{ f.r }};animation:tvConfetti {{ f.dur }}s {{ f.delay }}s linear infinite"></div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const P=[{n:'小美',k:0},{n:'阿傑',k:11},{n:'Kiki',k:2},{n:'大雄',k:1},{n:'Momo',k:8},{n:'小安',k:3},{n:'Leo',k:9},{n:'皮皮',k:4},{n:'Yuki',k:10},{n:'阿寶',k:7}];
+function qrSvg(){let s='';const N=25;let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+ const finder=(x,y)=>`<rect x="${x}" y="${y}" width="7" height="7" fill="#14112F"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#14112F" rx=".6"/>`;
+ const inF=(x,y)=>(x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16);
+ for(let y=0;y<N;y++)for(let x=0;x<N;x++){if(inF(x,y))continue;if(rnd()>.52)s+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#14112F"/>`;}
+ s+=finder(0,0)+finder(18,0)+finder(0,18)+`<rect x="10" y="10" width="5" height="5" rx="1.2" fill="#FF3D81" stroke="#14112F" stroke-width=".6"/>`;
+ return `<svg viewBox="0 0 25 25" width="100%" height="100%" shape-rendering="crispEdges" style="display:block">${s}</svg>`;}
+const stemEnd=w=>({stem:w.slice(0,-1),end:w.slice(-1)});
+class Component extends DCLogic{
+ state={c:0};
+ componentDidMount(){this.t=setInterval(()=>this.setState(s=>({c:(s.c+1)%4})),1000);}
+ componentWillUnmount(){clearInterval(this.t);}
+ renderVals(){
+  const c=this.state.c;
+  const peek=[{k:5,m:'normal'},{k:8,m:'score'},{k:3,m:'normal'},{k:0,m:'score'},{k:9,m:'normal'},{k:6,m:'score'},{k:10,m:'normal'}].map((p,i)=>({...p,d:(i*.3).toFixed(1)}));
+  const slots=Array.from({length:10},(_,i)=>i<6?{filled:true,empty:false,host:i===0,...P[i]}:{filled:false,empty:true});
+  const md=[['zap','閃電搶答','搶首字母'],['target','精準接龍','拚連擊'],['bomb','炸彈傳遞','別最後拿'],['out','末位淘汰','低分出局'],['team','組隊接力','兩隊對決'],['coop','合作長龍','全員一起'],['trap','陷阱接龍','小心封鎖']];
+  const modes=md.map((m,i)=>({icon:m[0],t:m[1],d:m[2],sel:i===0,bg:i===0?'#FFD23F':'#2C2870',fg:i===0?'#14112F':'#FFFFFF',tf:i===0?'translateY(-16px) rotate(-2deg)':'none'}));
+  const gw=[['SUNSHINE',1,160],['SNAKE',4,100],['SPOON',0,100],['SMILE',2,100],['STAR',8,80],['SOCCER',3,120],['SALAD',5,100],['SPIDER',1,120],['SWEET',9,100]];
+  const grabbed=gw.map((g,i)=>({w:g[0],k:P[g[1]].k,p:g[2],isNew:i===0,bg:i===0?'#FFD23F':'#FFFFFF'}));
+  const bd=[[1,2960,'▲1'],[0,2480,'▼1'],[4,2210,'—'],[2,1820,'▲2'],[8,1650,'—'],[3,1540,'▼2']];
+  const board=bd.map((b,i)=>({...P[b[0]],rank:i+1,sc:b[1].toLocaleString(),mv:b[2],first:i===0,medal:i===1||i===2,plain:i>2,medalBg:i===1?'#E6E8F7':'#FF8A3D',bg:i===0?'#FFD23F':'#3A3580',fg:i===0?'#14112F':'#FFFFFF',mood:i===0?'score':'normal'}));
+  const ln=[[1,5,8,0,'ELEPHANT'],[0,4,5,1,'TOMATO'],[4,4,3,0,'ORANGE'],[2,3,0,2,'EAGLE'],[8,2,2,1,'LEMON'],[3,1,0,3,'NUT']];
+  const lanes=ln.map(l=>({...P[l[0]],combo:l[2],fl:l[2]>=6?'3':l[2]>=3?'2':'1',last:l[4],pct:(l[1]/6*100).toFixed(1),mood:l[2]>=6?'score':l[3]>=3?'bombed':'normal',bg:l[3]>=3?'#3A1640':'#2C2870',
+   nodes:Array.from({length:5},(_,j)=>({left:((j+1)/6*100).toFixed(1),bg:j+1<=l[1]?'#FFFFFF':'#3A3580'})),errs:Array.from({length:3},(_,j)=>j<l[3]?'cross':'slot')}));
+  const cx=960,cy=560,rx=740,ry=340;
+  const pos=i=>{const a=(-90+i*36)*Math.PI/180;return [cx+rx*Math.cos(a),cy+ry*Math.sin(a)]};
+  const lives=[[1,1,1],[1,1,0],[1,1,0],[1,1,1],[1,0,0],[1,0,0],[1,1,1],[0,0,0],[1,1,0],[1,1,1]];
+  const holder=2,prev=0,hit=5,out=7;
+  const mk=(boom)=>P.map((p,i)=>{const [x,y]=pos(i);let h=lives[i].map(v=>v?'full':'empty');if(i===hit)h=['full','lost','empty'];if(boom&&i===holder)h=['full','lost','empty'];
+   const isH=!boom&&i===holder;const mood=i===out?'out':(boom&&i===holder)||(!boom&&i===hit)?'bombed':'normal';
+   return {...p,x:Math.round(x-100),y:Math.round(y-90),hearts:h,holder:isH,out:i===out,mood,anim:isH?'tvJitter .25s linear infinite':'none',plate:isH?'#FFD23F':i===out?'#4A4590':'#2C2870',plateFg:isH?'#14112F':'#FFFFFF'};});
+  const [x0,y0]=pos(prev),[x1,y1]=pos(holder);
+  const ex=x1+70,ey=y1-40;const arcD=`M${x0.toFixed(0)} ${(y0-20).toFixed(0)} Q${((x0+ex)/2).toFixed(0)} ${(Math.min(y0,ey)-240).toFixed(0)} ${ex.toFixed(0)} ${ey.toFixed(0)}`;
+  const el=[[1,3120],[0,2890],[4,2460],[8,2210],[2,1980],[9,1770],[6,1540],[3,1320],[7,820],[5,640]];
+  const elim=el.map((e,i)=>{const o=i>=8,d=i===7;return {...P[e[0]],rank:i+1,sc:e[1].toLocaleString(),out:o,danger:d,mood:o?'out':d?'bombed':i<2?'score':'normal',bg:o?'#3A3580':'#2C2870',border:d?'6px dashed #FF8A3D':'5px solid #14112F',filter:o?'grayscale(1) brightness(.75)':'none',anim:d?'tvJitter .5s ease-in-out infinite':'none'}});
+  const teamA={name:'洋紅隊',c:'#FF3D81',score:14,left:64,tint:'linear-gradient(rgba(255,61,129,.28),rgba(255,61,129,.28)),#2C2870',shapeR:'50%',clip:'none',members:[0,3,4,6,9].map((j,i)=>({...P[j],turn:i===0,mood:i===0?'normal':'normal',bg:i===0?'rgba(255,210,63,.25)':'transparent',border:i===0?'4px solid #FFD23F':'4px solid transparent'}))};
+  const teamB={name:'青綠隊',c:'#2EE6D6',score:12,left:1436,tint:'linear-gradient(rgba(46,230,214,.2),rgba(46,230,214,.2)),#2C2870',shapeR:'0',clip:'polygon(50% 0,100% 100%,0 100%)',members:[1,2,5,7,8].map(j=>({...P[j],turn:false,mood:'normal',bg:'transparent',border:'4px solid transparent'}))};
+  const rw=['MOON','NIGHT','TIGER','RABBIT','TOMATO','ORANGE','EAGLE'],rk=[0,1,3,2,4,5,6];
+  const relay=rw.map((w,i)=>{const a=i%2===0;return {...stemEnd(w),k:P[rk[i]].k,link:i>0,lv:a?'m':'c',c:a?'#FF3D81':'#2EE6D6',shapeR:a?'50%':'0',clip:a?'none':'polygon(50% 0,100% 100%,0 100%)',dx:a?-60:60,anim:i===rw.length-1?'tvPop .35s cubic-bezier(.34,1.56,.64,1) both':'none'}});
+  const cw=['ZEBRA','APPLE','EGG','GRAPE','ELEPHANT','TRAIN','NEST'];
+  const coop=cw.map((w,i)=>({...stemEnd(w),link:i>0,dy:i%2?30:-30,bg:i===cw.length-1?'#FFD23F':'#FFFFFF'}));
+  const coopP=[0,1,2,3,4,5,6,8].map((j,i)=>({...P[j],c:[4,3,5,2,3,1,2,3][i],m:i===1?'score':'normal',d:(i*.2).toFixed(1)}));
+  const br=[[1,960],[0,820],[4,700],[2,640],[8,520],[3,410],[9,300],[6,180]];
+  const bc=['#FFD23F','#2EE6D6','#FF8A3D','#FF8FB5','#FFFFFF','#9AF5EC','#FFB98A','#C9CCE8'];
+  const bars=br.map((b,i)=>({...P[b[0]],rank:i+1,sc:b[1],pct:(b[1]/960*100).toFixed(1),c:bc[i],delay:(i*.06).toFixed(2),mood:i===0?'score':'normal'}));
+  const podium=[{...P[0],rank:2,sc:'8,420',h:330,c:'#E6E8F7',tv:'silver',av:200,first:false,delay:.2,bob:.3},{...P[1],rank:1,sc:'9,860',h:470,c:'#FFD23F',tv:'gold',av:240,first:true,delay:.4,bob:0},{...P[4],rank:3,sc:'7,150',h:240,c:'#FF8A3D',tv:'bronze',av:190,first:false,delay:0,bob:.6}];
+  const CC=['#FF3D81','#FFD23F','#2EE6D6','#FF8A3D','#FFFFFF'];
+  const confetti=Array.from({length:48},(_,i)=>({left:((i*37)%100),w:i%3===0?22:14,h:i%3===0?22:30,r:i%3===0?'50%':'4px',c:CC[i%5],dur:(2.6+(i%5)*.4).toFixed(1),delay:((i*.29)%3).toFixed(2)}));
+  return {peek,slots,modes,grabbed,board,lanes,ringA:mk(false),ringB:mk(true),arcD,arcPath:`path('${arcD}')`,
+   boomX:Math.round(x1-180),boomY:Math.round(y1-200),minusX:Math.round(x1+40),minusY:Math.round(y1-160),
+   elim,teams:[teamA,teamB],relay,coop,coopP,trapHist:['TOMATO →','OWL →','LOG →','GALAXY'],bars,podium,confetti,
+   c3:c===0,c2:c===1,c1:c===2,cgo:c===3,
+   qr:React.createElement('span',{style:{display:'block',width:'100%',height:'100%'},dangerouslySetInnerHTML:{__html:qrSvg()}})};
+ }
+}
+</script>
+</body>
+</html>

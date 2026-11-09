@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:{{ size }}px;height:{{ size }}px;flex:none;display:block">{{ art }}</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:120,&quot;height&quot;:120},&quot;icon&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;heart&quot;,&quot;flame&quot;,&quot;crown&quot;,&quot;trophy&quot;,&quot;hourglass&quot;,&quot;lock&quot;,&quot;shield&quot;,&quot;star2x&quot;,&quot;star&quot;,&quot;link&quot;,&quot;balloon&quot;,&quot;spark&quot;,&quot;zap&quot;,&quot;target&quot;,&quot;bomb&quot;,&quot;out&quot;,&quot;team&quot;,&quot;coop&quot;,&quot;trap&quot;,&quot;check&quot;,&quot;cross&quot;,&quot;slot&quot;,&quot;clock&quot;,&quot;flag&quot;],&quot;default&quot;:&quot;heart&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:64,&quot;tsType&quot;:&quot;number&quot;}}">
+const K='#14112F',M='#FF3D81',Y='#FFD23F',C='#2EE6D6',O='#FF8A3D',W='#FFFFFF';
+const S=w=>`stroke="${K}" stroke-width="${w||5}" stroke-linejoin="round" stroke-linecap="round"`;
+const hl=(x,y,rx,ry,r)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#fff" opacity=".7" transform="rotate(${r??-30} ${x} ${y})"/>`;
+function star(cx,cy,R,r,n,rot){n=n||5;rot=rot??-90;const p=[];for(let i=0;i<n*2;i++){const a=(rot+i*180/n)*Math.PI/180,q=i%2?r:R;p.push((cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1))}return p.join(' ')}
+const HEART="M50 88 C22 70 8 54 8 36 C8 21 19 11 31 11 C40 11 46 16 50 23 C54 16 60 11 69 11 C81 11 92 21 92 36 C92 54 78 70 50 88Z";
+const COL={m:M,y:Y,c:C,o:O,w:W};
+const ART={
+ heart:v=>{const f=v==='empty'?'#3A3580':v==='lost'?'#8D8AB8':M;return `<path d="${HEART}" fill="${f}" ${S()}/>`+(v==='empty'||v==='lost'?'':hl(30,30,9,5))+(v==='lost'?`<path d="M50 23 L42 42 L56 52 L46 72" fill="none" ${S(4)}/>`:'')+(v==='empty'?`<path d="${HEART}" fill="none" stroke="#5B54C9" stroke-width="3" transform="translate(50 50) scale(.72) translate(-50 -50)"/>`:'')},
+ flame:v=>{const lv=Number(v)||2,sc=[.72,.86,1][lv-1],cs=[[Y,'#FFF3B8'],[O,Y],[M,O]][lv-1];return `<g transform="translate(50 94) scale(${sc}) translate(-50 -94)"><path d="M50 94 C26 94 14 76 18 58 C22 42 34 36 34 14 C50 22 60 36 58 50 C64 46 66 38 66 30 C80 42 88 60 82 74 C78 86 66 94 50 94Z" fill="${cs[0]}" ${S()}/><path d="M50 90 C39 90 32 82 34 72 C36 63 45 58 47 48 C56 56 66 64 64 75 C62 85 57 90 50 90Z" fill="${cs[1]}"/>${lv===3?`<ellipse cx="50" cy="80" rx="7" ry="9" fill="${Y}"/>`:''}${hl(30,60,4,9,20)}</g>`},
+ crown:()=>`<path d="M14 76 L16 32 L35 52 L50 20 L65 52 L84 32 L86 76Z" fill="${Y}" ${S()}/><circle cx="16" cy="30" r="5" fill="${Y}" ${S(4)}/><circle cx="50" cy="18" r="5" fill="${Y}" ${S(4)}/><circle cx="84" cy="30" r="5" fill="${Y}" ${S(4)}/><rect x="12" y="68" width="76" height="18" rx="5" fill="${O}" ${S()}/><circle cx="30" cy="77" r="4" fill="${M}"/><circle cx="50" cy="77" r="5" fill="${C}"/><circle cx="70" cy="77" r="4" fill="${M}"/>${hl(30,52,4,8,20)}`,
+ trophy:v=>{const f=v==='silver'?'#E6E8F7':v==='bronze'?O:Y;return `<path d="M26 20 H13 C13 40 21 47 30 47 M74 20 H87 C87 40 79 47 70 47" fill="none" ${S()}/><rect x="43" y="62" width="14" height="14" fill="${f}" ${S()}/><path d="M26 12 H74 V38 C74 56 63 66 50 66 C37 66 26 56 26 38Z" fill="${f}" ${S()}/><rect x="28" y="74" width="44" height="16" rx="4" fill="${f}" ${S()}/><polygon points="${star(50,37,12,5)}" fill="#fff" ${S(3)}/>${hl(35,28,3.5,9,0)}`},
+ hourglass:()=>`<path d="M28 18 H72 C72 38 56 44 56 50 C56 56 72 62 72 82 H28 C28 62 44 56 44 50 C44 44 28 38 28 18Z" fill="#DFFBF8" ${S()}/><path d="M35 27 H65 C63 36 54 42 50 46 C46 42 37 36 35 27Z" fill="${Y}"/><path d="M36 80 C40 68 50 63 50 63 C50 63 60 68 64 80Z" fill="${Y}"/><path d="M50 47 V64" stroke="${Y}" stroke-width="3"/><rect x="20" y="8" width="60" height="12" rx="5" fill="${O}" ${S()}/><rect x="20" y="80" width="60" height="12" rx="5" fill="${O}" ${S()}/>`,
+ lock:()=>`<path d="M32 48 V32 C32 20 40 12 50 12 C60 12 68 20 68 32 V48" fill="none" stroke="${K}" stroke-width="17" stroke-linecap="round"/><path d="M32 48 V32 C32 20 40 12 50 12 C60 12 68 20 68 32 V48" fill="none" stroke="#D9DCF2" stroke-width="7" stroke-linecap="round"/><rect x="18" y="44" width="64" height="46" rx="12" fill="${M}" ${S()}/><circle cx="50" cy="62" r="7" fill="${K}"/><rect x="46.5" y="63" width="7" height="15" rx="3" fill="${K}"/>${hl(30,56,4,8,0)}`,
+ shield:()=>`<path d="M50 8 L86 20 V46 C86 68 70 84 50 92 C30 84 14 68 14 46 V20 Z" fill="${C}" ${S()}/><path d="M50 17 L77 26 V46 C77 62 66 74 50 82 Z" fill="#fff" opacity=".35"/><polygon points="${star(50,50,16,7)}" fill="#fff" ${S(3.5)}/>`,
+ star2x:()=>`<polygon points="${star(50,52,47,23)}" fill="${Y}" ${S()}/><text x="50" y="63" text-anchor="middle" font-family="Fredoka,sans-serif" font-weight="700" font-size="30" fill="${K}">x2</text>${hl(32,36,4,7,30)}`,
+ star:()=>`<polygon points="${star(50,52,46,21)}" fill="${Y}" ${S()}/>${hl(34,38,4,7,30)}`,
+ link:v=>{const c=COL[v]||Y;return `<rect x="8" y="30" width="84" height="40" rx="20" fill="none" stroke="${K}" stroke-width="18"/><rect x="8" y="30" width="84" height="40" rx="20" fill="none" stroke="${c}" stroke-width="8"/><path d="M24 33 H44" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>`},
+ balloon:v=>{const c=COL[v]||M;return `<path d="M50 80 Q40 92 54 100 Q60 106 52 112" fill="none" stroke="${K}" stroke-width="3"/><path d="M44 80 L56 80 L50 73Z" fill="${c}" ${S(4)}/><ellipse cx="50" cy="40" rx="31" ry="36" fill="${c}" ${S()}/>${hl(37,25,6,11,-20)}`},
+ spark:v=>v==='b'?`<polygon points="${star(50,50,46,20,8)}" fill="${O}" ${S(4)}/><circle cx="50" cy="50" r="13" fill="${Y}"/>`:v==='c'?`<polygon points="${star(50,50,40,12,6)}" fill="#fff" ${S(4)}/><circle cx="50" cy="50" r="8" fill="${Y}"/>`:`<polygon points="${star(50,50,46,12,4)}" fill="${Y}" ${S(4)}/><polygon points="${star(50,50,20,6,4)}" fill="#fff"/>`,
+ zap:()=>`<polygon points="58,6 18,56 46,56 38,94 82,40 54,40 64,6" fill="${Y}" ${S()}/>`,
+ target:()=>`<circle cx="46" cy="54" r="40" fill="#fff" ${S()}/><circle cx="46" cy="54" r="27" fill="${M}" ${S(4)}/><circle cx="46" cy="54" r="15" fill="#fff" ${S(4)}/><circle cx="46" cy="54" r="6" fill="${M}"/><path d="M46 54 L86 14" ${S(5)}/><path d="M78 10 L90 10 L90 22" fill="${C}" ${S(4)}/>`,
+ bomb:()=>`<path d="M64 30 Q74 10 88 16" fill="none" ${S(5)}/><polygon points="${star(88,14,11,4,4)}" fill="${Y}" ${S(3)}/><g transform="rotate(40 62 34)"><rect x="52" y="26" width="20" height="14" rx="4" fill="#8A86C8" ${S(4)}/></g><circle cx="44" cy="60" r="32" fill="#2C2870" ${S()}/>${hl(32,46,7,4)}`,
+ out:()=>`<circle cx="44" cy="32" r="16" fill="#C9CCE8" ${S()}/><path d="M14 90 C14 66 28 56 44 56 C60 56 74 66 74 90Z" fill="#C9CCE8" ${S()}/><circle cx="76" cy="72" r="17" fill="${M}" ${S(4)}/><path d="M70 66 L82 78 M82 66 L70 78" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`,
+ team:()=>`<circle cx="32" cy="34" r="14" fill="${M}" ${S()}/><path d="M8 88 C8 64 18 56 32 56 C46 56 56 64 56 88Z" fill="${M}" ${S()}/><path d="M68 18 L84 46 H52Z" fill="${C}" ${S()}/><path d="M44 88 C44 66 54 56 68 56 C82 56 92 66 92 88Z" fill="${C}" ${S()}/>`,
+ coop:()=>`<g transform="rotate(-30 50 50)"><rect x="4" y="36" width="56" height="28" rx="14" fill="none" stroke="${K}" stroke-width="15"/><rect x="4" y="36" width="56" height="28" rx="14" fill="none" stroke="${C}" stroke-width="6"/><rect x="40" y="36" width="56" height="28" rx="14" fill="none" stroke="${K}" stroke-width="15"/><rect x="40" y="36" width="56" height="28" rx="14" fill="none" stroke="${Y}" stroke-width="6"/></g>`,
+ trap:()=>`<path d="M50 8 L94 88 H6Z" fill="${O}" ${S(6)}/><rect x="45" y="34" width="10" height="30" rx="5" fill="${K}"/><circle cx="50" cy="75" r="6" fill="${K}"/>`,
+ check:()=>`<circle cx="50" cy="50" r="42" fill="${C}" ${S()}/><path d="M30 52 L44 66 L72 36" fill="none" ${S(9)}/>`,
+ cross:()=>`<circle cx="50" cy="50" r="42" fill="${M}" ${S()}/><path d="M34 34 L66 66 M66 34 L34 66" stroke="#fff" stroke-width="9" stroke-linecap="round"/>`,
+ slot:()=>`<circle cx="50" cy="50" r="40" fill="none" stroke="#8D8AB8" stroke-width="5" stroke-dasharray="9 8"/>`,
+ clock:()=>`<rect x="42" y="4" width="16" height="12" rx="3" fill="${M}" ${S(4)}/><circle cx="50" cy="56" r="38" fill="#fff" ${S()}/><path d="M50 56 V34 M50 56 L64 64" ${S(5)}/>`,
+ flag:()=>`<path d="M22 94 V8" ${S(6)}/><path d="M22 12 H82 L72 32 L82 52 H22Z" fill="#fff" ${S()}/><rect x="22" y="12" width="15" height="20" fill="${K}"/><rect x="52" y="12" width="15" height="20" fill="${K}"/><rect x="37" y="32" width="15" height="20" fill="${K}"/>`
+};
+class Component extends DCLogic{
+ renderVals(){
+  const n=this.props.icon??'heart',v=this.props.variant??'',s=Number(this.props.size??64);
+  const body=(ART[n]||ART.heart)(v);
+  return {size:s,art:React.createElement('span',{style:{display:'block',width:'100%',height:'100%'},dangerouslySetInnerHTML:{__html:`<svg viewBox="0 0 100 100" width="100%" height="100%" style="overflow:visible;display:block">${body}</svg>`}})};
+ }
+}
+</script>
+</body>
+</html>
