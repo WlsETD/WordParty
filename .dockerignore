@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+.git
+docs
+packages/*/test
+packages/shared/scripts
+*.dc.html
+support.js
+README.md

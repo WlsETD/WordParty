@@ -1,0 +1,32 @@
+{
+  "name": "wordparty",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/web"
+  ],
+  "scripts": {
+    "build": "npm run build -w @wordparty/shared && npm run build -w @wordparty/server && npm run build -w @wordparty/web",
+    "typecheck": "tsc -p packages/shared --noEmit && tsc -p packages/server/tsconfig.test.json && npm run typecheck -w @wordparty/web",
+    "dev:web": "npm run dev -w @wordparty/web",
+    "test": "vitest run",
+    "test:unit": "vitest run packages/server/test/unit",
+    "test:integration": "vitest run packages/server/test/integration",
+    "dev": "npm run build -w @wordparty/shared && npm run dev -w @wordparty/server",
+    "start": "node packages/server/dist/index.js",
+    "gen:protocol": "tsx packages/shared/scripts/gen-protocol-doc.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "socket.io-client": "^4.8.1",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
